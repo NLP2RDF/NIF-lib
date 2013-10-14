@@ -24,11 +24,17 @@ public interface ModelPrefix {
 
     public static final String RDF_CORE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
-    public static final String RDF = "rdf";
+    public static final String RDF_LABEL = "rdf";
 
     public static final String ITSRDF_CORE = "http://www.w3.org/2005/11/its/rdf#";
 
     public static final String ITSRDF = "itsrdf";
+
+    public static final String CLASS_REF = "taClassRef";
+
+    public static final String IDENT_REF = "taIdentRef";
+
+    public static final String TYPE_LABEL ="type";
 
 
 }

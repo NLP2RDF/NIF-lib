@@ -11,6 +11,8 @@
     <properties>
         <jena.version>2.10.1</jena.version>
         <jena.iri.version>0.9.6</jena.iri.version>
+        <log4j.version>1.2.16</log4j.version>
+        <junit.version>4.11</junit.version>
     </properties>
 
     <dependencies>
@@ -35,7 +37,13 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
 
     </dependencies>

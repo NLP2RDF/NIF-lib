@@ -21,13 +21,14 @@ public interface NIFProperty {
 
     public static final String NIF_BEGIN_INDEX = "beginIndex";
 
+    public static final String NIF_TYPE = "type";
+
     public static final String NIF_ENDINDEX = "endIndex";
 
     public static final String NIF_ISSTRING = "isString";
 
     public static final String NIF_RFC5147 = "RFC5147String";
 
-    public static final String NIF_REFERENCECONTEXT = "referenceContext";
 
 
 }

@@ -45,7 +45,7 @@ public class NIFManager implements ModelPrefix, NIFProperty {
      * Prefixes
      */
     private void setPrefixes() {
-        model.setNsPrefix(RDF, RDF_CORE);
+        model.setNsPrefix(RDF_LABEL, RDF_CORE);
         model.setNsPrefix(ITSRDF, ITSRDF_CORE);
         model.setNsPrefix(NIF, NIF_CORE);
     }
@@ -56,9 +56,11 @@ public class NIFManager implements ModelPrefix, NIFProperty {
      * @param root
      */
     private void addRfc5147Format(Resource root) {
-        Property rfc5147Format = model.createProperty(NIF_CORE + NIF_RFC5147);
-        root.addProperty(com.hp.hpl.jena.vocabulary.RDF.type, rfc5147Format);
+        Property type = model.createProperty(RDF_CORE + TYPE_LABEL);
+        Property rfc5147 = model.createProperty(NIF_CORE + NIF_RFC5147);
+        model.add(root,type, rfc5147);
     }
+
 
     /**
      * Add begin property
@@ -82,43 +84,10 @@ public class NIFManager implements ModelPrefix, NIFProperty {
         model.add(root, endIndex, bean.getEndIndex().toString());
     }
 
-    /**
-     * Add Referency context
-     *
-     * @param root
-     * @param bean
-     */
-    private void addReferencyContext(Resource root, NIFBean bean) {
-        if (!bean.getReferenceContextURL().isEmpty()) {
-            Property referenceContext = model.createProperty(NIF_CORE + NIF_REFERENCECONTEXT);
-            root.addProperty(referenceContext, model.createResource(bean.getReferenceContextURL()));
-        }
 
-    }
-
-    /**
-     * Add String
-     *
-     * @param root
-     * @param bean
-     */
-    private void addString(Resource root, NIFBean bean) {
-        Property isString = model.createProperty(NIF_CORE + NIF_ISSTRING);
-        model.add(root, isString, bean.getContent());
-    }
-
-    /**
-     * Add context
-     *
-     * @param root
-     * @param bean
-     */
-    private void addContext(Resource root, NIFBean bean) {
-        if (bean.getReferenceContextURL().isEmpty()) {
-            Property context = model.createProperty(NIF_CORE + NIF_CONTEXT);
-            root.addProperty(com.hp.hpl.jena.vocabulary.RDF.type, context);
-        }
-
+    private void addIdentRef(Resource root, NIFBean bean) {
+        Property identRef = model.createProperty(ITSRDF_CORE + IDENT_REF);
+        model.add(root, identRef, model.createResource(bean.getResource()));
     }
 
     /**
@@ -131,9 +100,11 @@ public class NIFManager implements ModelPrefix, NIFProperty {
         if (!bean.getResourceTypes().isEmpty()) {
             Iterator<String> itTypes = bean.getResourceTypes().iterator();
 
+            Property type = model.createProperty(ITSRDF_CORE + CLASS_REF);
+
             while (itTypes.hasNext()) {
-                String type = itTypes.next();
-                root.addProperty(com.hp.hpl.jena.vocabulary.RDF.type, type);
+                String dbpediaType = itTypes.next();
+                model.add(root, type, model.createResource(dbpediaType) );
             }
         }
     }
@@ -152,10 +123,8 @@ public class NIFManager implements ModelPrefix, NIFProperty {
             addRfc5147Format(root);
             addBeginIndex(root, bean);
             addEndIndex(root, bean);
-            addReferencyContext(root, bean);
-            addString(root, bean);
-            addContext(root, bean);
             addTypes(root, bean);
+            addIdentRef(root,bean);
         }
 
     }
