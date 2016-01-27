@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - openjdk7
+  - oraclejdk7
+branches:
+  only:
+    - master
+install: /bin/true
+script: "mvn clean install"
+notifications:
+  email:
+    recipients:
+      - sandroacoelho@gmail.com
+    on_success: change 
+    on_failure: change
