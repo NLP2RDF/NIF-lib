@@ -4,5 +4,11 @@ The NLP Interchange Format (NIF) is an RDF/OWL-based format that aims to achieve
 
 
 ## Documentation
-Documentation for the NIF is at [http://persistence.uni-leipzig.org/nlp2rdf/](http://persistence.uni-leipzig.org/nlp2rdf/)
+
+[NIF Documentation](http://persistence.uni-leipzig.org/nlp2rdf/)
+
+
+## Issues
+
+If you have any problems with or questions about this library, please contact us through a [GitHub issue](https://github.com/sandroacoelho/NIF/issues).
 
