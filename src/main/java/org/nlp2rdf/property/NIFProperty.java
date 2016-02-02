@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.aksw.spotlight.nif.property;
+package org.nlp2rdf.property;
 
 
 public interface NIFProperty {

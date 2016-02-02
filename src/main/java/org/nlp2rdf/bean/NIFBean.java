@@ -13,7 +13,7 @@
  */
 
 
-package org.aksw.spotlight.nif.bean;
+package org.nlp2rdf.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
