@@ -16,10 +16,7 @@ package org.nlp2rdf.business;
 
 
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.*;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.prefix.ModelPrefix;
 import org.nlp2rdf.property.NIFProperty;
