@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.aksw.spotlight.nif.prefix;
+package org.nlp2rdf.prefix;
 
 
 public interface ModelPrefix {

@@ -12,16 +12,14 @@
  * limitations under the License.
  */
 
-package org.aksw.spotlight.nif.business;
+package org.nlp2rdf.business;
 
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
-import org.aksw.spotlight.nif.bean.NIFBean;
-import org.aksw.spotlight.nif.prefix.ModelPrefix;
-import org.aksw.spotlight.nif.property.NIFProperty;
+
+import com.hp.hpl.jena.rdf.model.*;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.prefix.ModelPrefix;
+import org.nlp2rdf.property.NIFProperty;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
@@ -35,10 +33,15 @@ public class NIFManager implements ModelPrefix, NIFProperty {
     private Model model;
     private List<NIFBean> beans;
 
-    public NIFManager(List<NIFBean> beans) {
+    private NIFManager(List<NIFBean> beans) {
         this.model = ModelFactory.createDefaultModel();
         this.beans = beans;
         build();
+    }
+
+    public static final NIFManager build(List<NIFBean> beans) {
+        NIFManager result = new NIFManager(beans);
+        return result;
     }
 
     /**

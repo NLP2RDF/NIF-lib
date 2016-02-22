@@ -13,7 +13,7 @@
  */
 
 
-package org.aksw.spotlight.nif.bean;
+package org.nlp2rdf.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +23,6 @@ public class NIFBean implements Serializable {
 
     private String URL = "";
 
-    @Deprecated
     private String content = "";
 
     private String resource = "";
@@ -40,7 +39,7 @@ public class NIFBean implements Serializable {
      * NIFBean URL
      */
     public String getURL() {
-        return URL.concat("#char=").concat(getOffset().toString()).concat(",").concat(getEndIndex().toString());
+        return  String.format("%s%s%d%s%d", URL, "#char=",getOffset(), ",", getEndIndex());
     }
 
     public void setURL(String URL) {
@@ -84,12 +83,10 @@ public class NIFBean implements Serializable {
     /**
      * NIF content
      */
-    @Deprecated
     public String getContent() {
         return content;
     }
 
-    @Deprecated
     public void setContent(String content) {
         this.content = content;
     }
