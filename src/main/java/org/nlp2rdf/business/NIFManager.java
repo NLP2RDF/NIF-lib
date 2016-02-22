@@ -15,13 +15,15 @@
 package org.nlp2rdf.business;
 
 
-
-import com.hp.hpl.jena.rdf.model.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.prefix.ModelPrefix;
 import org.nlp2rdf.property.NIFProperty;
-import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
 
 import java.io.IOException;
 import java.io.StringWriter;
