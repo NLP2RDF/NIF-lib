@@ -23,7 +23,6 @@ public class NIFBean implements Serializable {
 
     private String URL = "";
 
-    @Deprecated
     private String content = "";
 
     private String resource = "";
@@ -84,12 +83,10 @@ public class NIFBean implements Serializable {
     /**
      * NIF content
      */
-    @Deprecated
     public String getContent() {
         return content;
     }
 
-    @Deprecated
     public void setContent(String content) {
         this.content = content;
     }
