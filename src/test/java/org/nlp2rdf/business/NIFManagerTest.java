@@ -1,11 +1,15 @@
 package org.nlp2rdf.business;
 
 
-import com.hp.hpl.jena.rdf.model.Model;
+import org.aksw.rdfunit.enums.TestCaseExecutionType;
 import org.aksw.rdfunit.exceptions.TestCaseInstantiationException;
-import org.aksw.rdfunit.io.reader.RDFReaderException;
-import org.aksw.rdfunit.io.reader.RDFReaderFactory;
-import org.aksw.rdfunit.utils.TestUtils;
+import org.aksw.rdfunit.io.reader.RdfReaderException;
+import org.aksw.rdfunit.io.reader.RdfReaderFactory;
+import org.aksw.rdfunit.model.interfaces.results.TestCaseResult;
+import org.aksw.rdfunit.model.interfaces.results.TestExecution;
+import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator;
+import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.junit.Test;
 import org.nlp2rdf.bean.NIFBean;
@@ -13,6 +17,10 @@ import org.nlp2rdf.bean.NIFBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 
 public class NIFManagerTest {
 
@@ -70,40 +78,60 @@ public class NIFManagerTest {
     }
 
     @Test
-    public void testTurtleOutputWithRDFUnit() throws RDFReaderException, TestCaseInstantiationException {
+    public void testRdfResultsIsomorphic() throws RdfReaderException {
+        //Init
+        List<NIFBean> beans = getBeans();
+
+        String turtle = NIFManager.build(beans).getTurtle();
+        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+    }
+
+
+    @Test
+    public void testTurtleOutputWithRDFUnit() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBeans();
 
         //Act
         String turtle = NIFManager.build(beans).getTurtle();
-        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+        Model modelTtl = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
 
-        TestUtils.instantiateTestsFromModel(model, true);
+        String rdfXml = NIFManager.build(beans).getRDFxml();
+        Model modelXml = RdfReaderFactory.createReaderFromText(rdfXml, Lang.RDFXML.getName()).read();
+
+        String ntriples = NIFManager.build(beans).getNTriples();
+        Model modelNt = RdfReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
+
+
+        assertTrue(modelNt.isIsomorphicWith(modelTtl));
+        assertTrue(modelNt.isIsomorphicWith(modelXml));
+
     }
 
-    @Test
-    public void testRDFXMLOutputWithRDFUnit() throws RDFReaderException, TestCaseInstantiationException {
-        //Init
-        List<NIFBean> beans = getBeans();
-
-        //Act
-        String turtle = NIFManager.build(beans).getRDFxml();
-        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.RDFXML.getName()).read();
-
-        TestUtils.instantiateTestsFromModel(model, true);
-    }
 
     @Test
-    public void testNTripleOutputWithRDFUnit() throws RDFReaderException, TestCaseInstantiationException {
+    public void testNTripleOutputWithRDFUnit() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBeans();
 
         //Act
         String turtle = NIFManager.build(beans).getNTriples();
 
-        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
+        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
 
-        TestUtils.instantiateTestsFromModel(model, true);
+        RDFUnitStaticValidator.initWrapper(
+                new RDFUnitTestSuiteGenerator.Builder()
+                        .addLocalResourceOrSchemaURI("nif", "org/uni-leipzig/persistence/nlp2rdf/nif-core/nif-core.ttl", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#")
+                        .build()
+        );
+
+
+        TestExecution te = RDFUnitStaticValidator.validate(model, TestCaseExecutionType.shaclSimpleTestCaseResult);
+
+
+        for (TestCaseResult r: te.getTestCaseResults()) {
+            fail(r.getMessage());
+        }
     }
 
 }
