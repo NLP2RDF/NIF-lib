@@ -6,7 +6,7 @@ jdk:
 branches:
   only:
     - master
-    - lucene
+    - nif2.0
 install: /bin/true
 script: "mvn clean install"
 notifications:
