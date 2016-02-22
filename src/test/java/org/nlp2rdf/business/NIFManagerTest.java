@@ -1,10 +1,18 @@
 package org.nlp2rdf.business;
 
 
+import org.aksw.rdfunit.exceptions.TestCaseInstantiationException;
+import org.aksw.rdfunit.io.reader.RDFReaderException;
+import org.aksw.rdfunit.io.reader.RDFReaderFactory;
+import org.aksw.rdfunit.utils.TestUtils;
+import com.hp.hpl.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.nlp2rdf.bean.NIFBean;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NIFManagerTest {
@@ -14,6 +22,19 @@ public class NIFManagerTest {
 
         NIFBean bean = new NIFBean();
         bean.setContent("Berlin is the capital of Germany and one of the 16 states of Germany.");
+        bean.setResourceTypes(Arrays.asList("DBpedia:Place", "DBpedia:Location"));
+        bean.setOffset(1);
+        bean.setSize(6);
+        bean.setURL("http://dbpedia.org/page/Berlin");
+
+        result.add(bean);
+
+        bean = new NIFBean();
+        bean.setContent("Berlin is the capital of Germany and one of the 16 states of Germany.");
+        bean.setResourceTypes(Arrays.asList("DBpedia:Place", "DBpedia:Location"));
+        bean.setOffset(61);
+        bean.setSize(7);
+        bean.setURL("http://dbpedia.org/page/Germany");
 
         result.add(bean);
 
@@ -45,6 +66,42 @@ public class NIFManagerTest {
 
         //Act
         NIFManager.build(beans).getTurtle();
+    }
+
+    @Test
+    public void testTurtleOutputWithRDFUnit() throws RDFReaderException, TestCaseInstantiationException {
+        //Init
+        List<NIFBean> beans = getBeans();
+
+        //Act
+        String turtle = NIFManager.build(beans).getTurtle();
+        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+
+        TestUtils.instantiateTestsFromModel(model, true);
+    }
+
+    @Test
+    public void testRDFXMLOutputWithRDFUnit() throws RDFReaderException, TestCaseInstantiationException {
+        //Init
+        List<NIFBean> beans = getBeans();
+
+        //Act
+        String turtle = NIFManager.build(beans).getTurtle();
+        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.RDFXML.getName()).read();
+
+        TestUtils.instantiateTestsFromModel(model, true);
+    }
+
+    @Test
+    public void testNTripleOutputWithRDFUnit() throws RDFReaderException, TestCaseInstantiationException {
+        //Init
+        List<NIFBean> beans = getBeans();
+
+        //Act
+        String turtle = NIFManager.build(beans).getTurtle();
+        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
+
+        TestUtils.instantiateTestsFromModel(model, true);
     }
 
 }

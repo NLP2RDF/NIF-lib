@@ -39,7 +39,7 @@ public class NIFBean implements Serializable {
      * NIFBean URL
      */
     public String getURL() {
-        return URL.concat("#char=").concat(getOffset().toString()).concat(",").concat(getEndIndex().toString());
+        return  String.format("%s%s%d%s%d", URL, "#char=",getOffset(), ",", getEndIndex());
     }
 
     public void setURL(String URL) {
