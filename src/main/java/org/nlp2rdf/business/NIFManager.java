@@ -15,6 +15,7 @@
 package org.nlp2rdf.business;
 
 
+import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
@@ -50,6 +51,7 @@ public class NIFManager implements ModelPrefix, NIFProperty {
      * Prefixes
      */
     private void setPrefixes() {
+        model.setNsPrefix(XSD_LABEL, XSD_CORE);
         model.setNsPrefix(RDF_LABEL, RDF_CORE);
         model.setNsPrefix(ITSRDF, ITSRDF_CORE);
         model.setNsPrefix(NIF, NIF_CORE);
@@ -84,7 +86,7 @@ public class NIFManager implements ModelPrefix, NIFProperty {
      */
     private void addBeginIndex(Resource root, NIFBean bean) {
         Property beginIndex = model.createProperty(NIF_CORE + NIF_BEGIN_INDEX);
-        model.add(root, beginIndex, bean.getOffset().toString());
+        model.add(root, beginIndex, bean.getOffset().toString(), XSDDatatype.XSDnonNegativeInteger);
     }
 
     /**
@@ -95,7 +97,7 @@ public class NIFManager implements ModelPrefix, NIFProperty {
      */
     private void addEndIndex(Resource root, NIFBean bean) {
         Property endIndex = model.createProperty(NIF_CORE + NIF_ENDINDEX);
-        model.add(root, endIndex, bean.getEndIndex().toString());
+        model.add(root, endIndex, bean.getEndIndex().toString(), XSDDatatype.XSDnonNegativeInteger);
     }
 
 

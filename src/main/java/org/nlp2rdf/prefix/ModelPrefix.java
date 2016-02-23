@@ -18,23 +18,27 @@ package org.nlp2rdf.prefix;
 public interface ModelPrefix {
 
 
-    public static final String NIF_CORE = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#";
+    String NIF_CORE = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#";
 
-    public static final String NIF = "nif";
+    String NIF = "nif";
 
-    public static final String RDF_CORE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+    String RDF_CORE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
-    public static final String RDF_LABEL = "rdf";
+    String RDF_LABEL = "rdf";
 
-    public static final String ITSRDF_CORE = "http://www.w3.org/2005/11/its/rdf#";
+    String XSD_LABEL = "xsd";
 
-    public static final String ITSRDF = "itsrdf";
+    String XSD_CORE = "http://www.w3.org/2001/XMLSchema#";
 
-    public static final String CLASS_REF = "taClassRef";
+    String ITSRDF_CORE = "http://www.w3.org/2005/11/its/rdf#";
 
-    public static final String IDENT_REF = "taIdentRef";
+    String ITSRDF = "itsrdf";
 
-    public static final String TYPE_LABEL ="type";
+    String CLASS_REF = "taClassRef";
+
+    String IDENT_REF = "taIdentRef";
+
+    String TYPE_LABEL ="type";
 
 
 }

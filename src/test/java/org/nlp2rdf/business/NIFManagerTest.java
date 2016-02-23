@@ -79,10 +79,11 @@ public class NIFManagerTest {
     }
 
     @Test
-    public void testRdfResultsIsomorphic() throws RdfReaderException {
+    public void testIsomorphicRdfResults() throws RdfReaderException {
         //Init
         List<NIFBean> beans = getBeans();
 
+        //Act
         String turtle = NIFManager.build(beans).getTurtle();
         Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
     }
@@ -134,15 +135,15 @@ public class NIFManagerTest {
 
         //Act
         String turtle = NIFManager.build(beans).getNTriples();
-        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
+
+       Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
         RDFUnitStaticValidator.initWrapper(
                 new RDFUnitTestSuiteGenerator.Builder()
                         .addLocalResourceOrSchemaURI("nif", "org/uni-leipzig/persistence/nlp2rdf/nif-core/nif-core.ttl", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#")
                         .build()
         );
-        TestExecution te = RDFUnitStaticValidator.validate(model, TestCaseExecutionType.shaclSimpleTestCaseResult);
+        TestExecution te = RDFUnitStaticValidator.validate(model, TestCaseExecutionType.shaclFullTestCaseResult);
 
-        System.out.println(turtle);
         //Assert
         for(TestCaseResult tcr : te.getTestCaseResults()) {
             fail(tcr.getMessage());
