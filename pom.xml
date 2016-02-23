@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>NIF</groupId>
+    <groupId>org.nlp2rdf</groupId>
     <artifactId>NIF</artifactId>
     <version>0.1</version>
 
@@ -55,8 +55,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.aksw.rdfunit</groupId>
+            <artifactId>rdfunit-io</artifactId>
+            <version>${rdfunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
-
-    
 </project>
