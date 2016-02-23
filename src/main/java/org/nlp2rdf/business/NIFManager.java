@@ -66,6 +66,15 @@ public class NIFManager implements ModelPrefix, NIFProperty {
         model.add(root,type, rfc5147);
     }
 
+    /**
+     * Add datatype property
+     * @param root
+     */
+    private void addDataType(Resource root) {
+        Property type = model.createProperty(RDF_CORE + TYPE_LABEL);
+        Property dataType = model.createProperty(NIF_CORE + NIF_STRING);
+        model.add(root,type, dataType);
+    }
 
     /**
      * Add begin property
@@ -126,6 +135,7 @@ public class NIFManager implements ModelPrefix, NIFProperty {
             NIFBean bean = (NIFBean) it.next();
             Resource root = model.createResource(bean.getURL());
             addRfc5147Format(root);
+            addDataType(root);
             addBeginIndex(root, bean);
             addEndIndex(root, bean);
             addTypes(root, bean);

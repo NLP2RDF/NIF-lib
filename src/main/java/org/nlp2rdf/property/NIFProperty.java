@@ -29,6 +29,6 @@ public interface NIFProperty {
 
     public static final String NIF_RFC5147 = "RFC5147String";
 
-
+    public static final String NIF_STRING= "isString";
 
 }

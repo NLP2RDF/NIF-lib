@@ -3,9 +3,11 @@ package org.nlp2rdf.business;
 
 import org.aksw.rdfunit.enums.TestCaseExecutionType;
 import org.aksw.rdfunit.exceptions.TestCaseInstantiationException;
-import org.aksw.rdfunit.io.reader.RDFReaderException;
-import org.aksw.rdfunit.io.reader.RDFReaderFactory;
+import org.aksw.rdfunit.io.reader.RdfReaderException;
+import org.aksw.rdfunit.io.reader.RdfReaderFactory;
 import org.aksw.rdfunit.model.impl.results.DatasetOverviewResults;
+import org.aksw.rdfunit.model.interfaces.results.TestCaseResult;
+import org.aksw.rdfunit.model.interfaces.results.TestExecution;
 import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator;
 import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
 import org.apache.jena.rdf.model.Model;
@@ -17,8 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 
 public class NIFManagerTest {
@@ -77,26 +79,26 @@ public class NIFManagerTest {
     }
 
     @Test
-    public void testRdfResultsIsomorphic() throws RDFReaderException {
+    public void testRdfResultsIsomorphic() throws RdfReaderException {
         //Init
         List<NIFBean> beans = getBeans();
 
         String turtle = NIFManager.build(beans).getTurtle();
-        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
     }
 
 
     @Test
-    public void testIfNTisIsomorphicWithTurtle() throws RDFReaderException, TestCaseInstantiationException {
+    public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBeans();
 
         //Act
         String turtle = NIFManager.build(beans).getTurtle();
-        Model modelTtl = RDFReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+        Model modelTtl = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
 
         String ntriples = NIFManager.build(beans).getNTriples();
-        Model modelNt = RDFReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
+        Model modelNt = RdfReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
 
         //Assert
         assertTrue(modelNt.isIsomorphicWith(modelTtl));
@@ -106,16 +108,16 @@ public class NIFManagerTest {
 
 
     @Test
-    public void testIfNTisIsomorphicWithXml() throws RDFReaderException, TestCaseInstantiationException {
+    public void testIfNTisIsomorphicWithXml() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBeans();
 
         //Act
         String rdfXml = NIFManager.build(beans).getRDFxml();
-        Model modelXml = RDFReaderFactory.createReaderFromText(rdfXml, Lang.RDFXML.getName()).read();
+        Model modelXml = RdfReaderFactory.createReaderFromText(rdfXml, Lang.RDFXML.getName()).read();
 
         String ntriples = NIFManager.build(beans).getNTriples();
-        Model modelNt = RDFReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
+        Model modelNt = RdfReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
 
         //Assert
         assertTrue(modelNt.isIsomorphicWith(modelXml));
@@ -124,7 +126,7 @@ public class NIFManagerTest {
 
 
     @Test
-    public void testDynamicRDFUnitTestsLookingForErrors() throws RDFReaderException, TestCaseInstantiationException {
+    public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBeans();
         DatasetOverviewResults overviewResults = new DatasetOverviewResults();
@@ -132,20 +134,20 @@ public class NIFManagerTest {
 
         //Act
         String turtle = NIFManager.build(beans).getNTriples();
-        Model model = RDFReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
+        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
         RDFUnitStaticValidator.initWrapper(
                 new RDFUnitTestSuiteGenerator.Builder()
                         .addLocalResourceOrSchemaURI("nif", "org/uni-leipzig/persistence/nlp2rdf/nif-core/nif-core.ttl", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#")
                         .build()
         );
-        RDFUnitStaticValidator.validate(model, TestCaseExecutionType.shaclSimpleTestCaseResult ,  "custom", overviewResults);
+        TestExecution te = RDFUnitStaticValidator.validate(model, TestCaseExecutionType.shaclSimpleTestCaseResult);
 
-
+        System.out.println(turtle);
         //Assert
-        assertEquals("Expected zero errors", 0, overviewResults.getErrorTests());
-        assertEquals("Expected zero failures", 0, overviewResults.getFailedTests());
-        assertEquals("Expected zero individual errors", 0, overviewResults.getIndividualErrors());
-        assertEquals("Total of Test must be equals to Sucessfull tests", overviewResults.getTotalTests(), overviewResults.getSuccessfullTests());
+        for(TestCaseResult tcr : te.getTestCaseResults()) {
+            fail(tcr.getMessage());
+        }
+
     }
 
 }
