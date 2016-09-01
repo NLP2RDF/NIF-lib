@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib)
 
-[![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF/badge.svg)](https://coveralls.io/github/sandroacoelho/NIF)
+[![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF-lib/badge.svg?branch=master)](https://coveralls.io/github/sandroacoelho/NIF-lib?branch=master)
 
 ## What is NIF (NLP Interchange Format) ?
 
