@@ -138,7 +138,7 @@ public class NIF21Test {
 
         //Act
         NIF nif21 = new NIF21(bean);
-        String turtle = nif21.getTurtle();
+        String turtle = nif21.getNTriples();
         System.out.println(turtle);
 
         Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();

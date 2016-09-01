@@ -136,7 +136,8 @@ public class NIF20Test {
 
         //Act
         NIF20 nif20 = new NIF20(bean);
-        String turtle = nif20.getTurtle();
+        String turtle = nif20.getNTriples();
+
 
         Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
         RDFUnitStaticValidator.initWrapper(

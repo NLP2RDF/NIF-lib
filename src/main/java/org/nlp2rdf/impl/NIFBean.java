@@ -39,6 +39,7 @@ public class NIFBean {
         this.score = builder.score;
         this.taIdentRef = builder.taIdentRef;
         this.referenceContext = builder.referenceContext;
+        this.annotator = builder.annotator;
     }
 
     public Double getScore() {
