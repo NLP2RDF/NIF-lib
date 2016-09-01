@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.nlp2rdf</groupId>
     <artifactId>NIF</artifactId>
     <packaging>jar</packaging>
-    <version>0.2</version>
+    <version>0.3</version>
     <name>NIF library</name>
 
     <description>
@@ -20,7 +20,7 @@
         <developer>
             <name>Sandro A. Coelho</name>
             <email>sandro.coelho@ice.ufjf.br</email>
-            <organization>AKSW / KILT Group </organization>
+            <organization>AKSW / KILT Group</organization>
             <organizationUrl>http://persistence.uni-leipzig.org/nlp2rdf/</organizationUrl>
         </developer>
     </developers>
@@ -127,7 +127,8 @@
                             <useReleaseProfile>false</useReleaseProfile>
                             <releaseProfiles>release</releaseProfiles>
                             <tagNameFormat>v@{project.version}</tagNameFormat>
-                            <scmCommentPrefix>[maven-release-plugin] [ci build-cli] [ci build-webdemo] -</scmCommentPrefix>
+                            <scmCommentPrefix>[maven-release-plugin] [ci build-cli] [ci build-webdemo] -
+                            </scmCommentPrefix>
                         </configuration>
                     </plugin>
                 </plugins>
