@@ -23,10 +23,10 @@ public class NIF20Literal implements NIFLiteral, NIF20Format {
                         entity.getMention());
                 contextRes.addLiteral(
                         model.createProperty(NIF_PROPERTY_BEGININDEX),
-                        model.createTypedLiteral(entity.getBeginIndex()));
+                        model.createTypedLiteral(entity.getContext().getBeginIndex()));
                 contextRes.addLiteral(
                         model.createProperty(NIF_PROPERTY_ENDINDEX),
-                        model.createTypedLiteral(entity.getEndIndex()));
+                        model.createTypedLiteral(entity.getContext().getEndIndex()));
 
             } else if (entity.isMention()) {
 

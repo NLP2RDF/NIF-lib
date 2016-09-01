@@ -1,5 +1,6 @@
 package org.nlp2rdf.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,8 @@ public class NIFBean {
 
     private Integer endIndex;
 
-    private NIFType nifType = NIFType.ENTITY;;
+    private NIFType nifType = NIFType.ENTITY;
+    ;
 
     private List<String> types;
 
@@ -27,6 +29,13 @@ public class NIFBean {
     private String referenceContext;
 
     private Map<String, String> entityTypes = new HashMap<String, String>(8);
+
+    public NIFBean(List<NIFBeanBuilder> builders) {
+
+        List<NIFBean> nifBeans = new ArrayList<NIFBean>();
+
+        builders.forEach(builder -> nifBeans.add(new NIFBean(builder)));
+    }
 
     public NIFBean(NIFBeanBuilder builder) {
         init();

@@ -15,6 +15,7 @@ import org.apache.jena.riot.Lang;
 import org.junit.Test;
 import org.nlp2rdf.impl.NIF20;
 import org.nlp2rdf.impl.NIFBean;
+import org.nlp2rdf.impl.NIFType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,62 +26,100 @@ import static org.junit.Assert.fail;
 
 public class NIF20Test {
 
-    private NIFBean getBean() {
+    private List<NIFBean> getBean() {
 
-        List<String> types = new ArrayList<String>();
-        types.add("http://dbpedia.org/ontology/Person");
-        types.add("http://dbpedia.org/ontology/SportsManager");
-        types.add("http://dbpedia.org/ontology/SoccerManager");
-        types.add("http://nerd.eurecom.fr/ontology#Person");
+        //----------------------------
+        List<NIFBean> result = new ArrayList<>();
 
+        NIFBean.NIFBeanBuilder builderContext = new NIFBean.NIFBeanBuilder();
 
-        NIFBean.NIFBeanBuilder builder = new NIFBean.NIFBeanBuilder();
-        builder.context("http://freme-project.eu", 0, 22).mention("Diego Maradona").beginIndex(0).endIndex(14)
+        builderContext.context("http://freme-project.eu", 0, 33).mention("Diego Maradona is from Argentina.").nifType(NIFType.CONTEXT);
+
+        NIFBean beanContext = new NIFBean(builderContext);
+
+        result.add(beanContext);
+
+        //-------------------------
+
+        NIFBean.NIFBeanBuilder builderMention1 = new NIFBean.NIFBeanBuilder();
+
+        List<String> typesMention1 = new ArrayList<String>();
+        typesMention1.add("http://dbpedia.org/ontology/Place");
+        typesMention1.add("http://dbpedia.org/ontology/Location");
+        typesMention1.add("http://dbpedia.org/ontology/PopulatedPlace");
+        typesMention1.add("http://nerd.eurecom.fr/ontology#Location");
+        typesMention1.add("http://dbpedia.org/ontology/Country");
+
+        builderMention1.context("http://freme-project.eu", 23, 32).mention("Argentina").beginIndex(0).endIndex(14)
+                .taIdentRef("http://dbpedia.org/resource/Argentina").score(0.9804963628413852)
+                .annotator("http://freme-project.eu/tools/freme-ner")
+                .types(typesMention1);
+
+        NIFBean bean = new NIFBean(builderMention1);
+
+        result.add(bean);
+
+        //----------------------------
+
+        NIFBean.NIFBeanBuilder builderMention2 = new NIFBean.NIFBeanBuilder();
+
+        List<String> typesMention2 = new ArrayList<String>();
+        typesMention2.add("http://dbpedia.org/ontology/Person");
+        typesMention2.add("http://dbpedia.org/ontology/SportsManager");
+        typesMention2.add("http://dbpedia.org/ontology/SoccerManager");
+        typesMention2.add("http://nerd.eurecom.fr/ontology#Person");
+
+        builderMention2.context("http://freme-project.eu", 0, 14).mention("Diego Maradona").beginIndex(0).endIndex(14)
                 .taIdentRef("http://dbpedia.org/resource/Diego_Maradona").score(0.9869992701528016)
                 .annotator("http://freme-project.eu/tools/freme-ner")
-                .types(types);
-        NIFBean bean = new NIFBean(builder);
+                .types(typesMention2);
 
-        return bean;
+        NIFBean bean1 = new NIFBean(builderMention2);
+
+        //----------------------------
+
+        result.add(bean1);
+
+        return result;
     }
 
     @Test
     public void testGenerateNTriples() {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         System.out.println(nif20.getNTriples());
     }
 
     @Test
     public void testGenerateRDFxml() {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         System.out.println(nif20.getRDFxml());
     }
 
     @Test
     public void testGenerateTurtle() {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         System.out.println(nif20.getTurtle());
     }
 
     @Test
     public void testIsomorphicRdfResults() throws RdfReaderException {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         String turtle = nif20.getTurtle();
 
         //Assert
@@ -91,10 +130,10 @@ public class NIF20Test {
     @Test
     public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         String turtle = nif20.getTurtle();
 
         Model modelTtl = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
@@ -111,10 +150,10 @@ public class NIF20Test {
     @Test
     public void testIfNTisIsomorphicWithXml() throws RdfReaderException, TestCaseInstantiationException {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         String rdfXml = nif20.getRDFxml();
         Model modelXml = RdfReaderFactory.createReaderFromText(rdfXml, Lang.RDFXML.getName()).read();
 
@@ -130,12 +169,12 @@ public class NIF20Test {
     @Test
     public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
-        NIFBean bean = getBean();
+        List<NIFBean> beans = getBean();
         DatasetOverviewResults overviewResults = new DatasetOverviewResults();
 
 
         //Act
-        NIF20 nif20 = new NIF20(bean);
+        NIF nif20 = new NIF20(beans);
         String turtle = nif20.getNTriples();
 
 

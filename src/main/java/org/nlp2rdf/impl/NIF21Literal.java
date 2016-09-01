@@ -24,10 +24,10 @@ public class NIF21Literal implements NIFLiteral, NIF21Format {
                         entity.getMention());
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_BEGININDEX),
-                        entity.getBeginIndex().toString(), XSDDatatype.XSDnonNegativeInteger);
+                        entity.getContext().getBeginIndex().toString(), XSDDatatype.XSDnonNegativeInteger);
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_ENDINDEX),
-                        entity.getEndIndex().toString(), XSDDatatype.XSDnonNegativeInteger);
+                        entity.getContext().getEndIndex().toString(), XSDDatatype.XSDnonNegativeInteger);
 
             } else if (entity.isMention()) {
 

@@ -6,18 +6,18 @@ import org.nlp2rdf.NIF20Format;
 import org.nlp2rdf.NIFFormat;
 import org.nlp2rdf.NIFVisitor;
 
+import java.util.List;
+
 
 public class NIF20 extends Formats implements NIF20Format, NIF {
 
-
     private NIFFormat[] elements;
 
-    private NIFBean bean;
+    private List<NIFBean> beans;
 
-    public NIF20(NIFBean bean) {
-        this.elements = new NIFFormat[]{new NIF20Model(), new NIF20Resource(), new NIF20Prefixes(), new NIF20Properties(), new NIF20Literal()};
-        this.bean = bean;
-
+    public NIF20(List<NIFBean> beans) {
+        this.beans = beans;
+        this.elements = new NIFFormat[]{new NIF20Resource(), new NIF20Prefixes(), new NIF20Properties(), new NIF20Literal()};
     }
 
     public void accept(NIFVisitor visitor) {
@@ -27,8 +27,22 @@ public class NIF20 extends Formats implements NIF20Format, NIF {
     }
 
     public Model getModel() {
-        NIFVisitor nifVisitor = new NIF20CreateContext(bean.getContext(), bean);
+
+        NIF20Model model = new NIF20Model();
+
+        NIFBean bean = beans.get(0);
+        NIF20CreateContext nif20Context = new NIF20CreateContext(bean.getContext(), bean);
+
+
+        nif20Context.setModel(model.create());
+        NIFVisitor nifVisitor = nif20Context;
+
         accept(nifVisitor);
+
+        for (int i = 1; i < beans.size(); i++) {
+            nif20Context.setBean(beans.get(i));
+            accept(nifVisitor);
+        }
 
         return nifVisitor.getModel();
     }

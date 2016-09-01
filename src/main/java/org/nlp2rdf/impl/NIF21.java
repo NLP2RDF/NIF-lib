@@ -6,23 +6,39 @@ import org.nlp2rdf.NIF21Format;
 import org.nlp2rdf.NIFFormat;
 import org.nlp2rdf.NIFVisitor;
 
+import java.util.List;
+
 
 public class NIF21 extends Formats implements NIF21Format, NIF {
 
     NIFFormat[] elements;
-    private NIFBean bean;
 
-    public NIF21(NIFBean bean) {
-        this.elements = new NIFFormat[]{new NIF21Model(), new NIF21Resource(), new NIF21Prefixes(), new NIF21Properties(), new NIF21Literal(), new NIF21AnnotationUnit()};
-        this.bean = bean;
+    private List<NIFBean> beans;
+
+    public NIF21(List<NIFBean> beans) {
+        this.elements = new NIFFormat[]{new NIF21Resource(), new NIF21Prefixes(), new NIF21Properties(), new NIF21Literal(), new NIF21AnnotationUnit()};
+        this.beans = beans;
     }
 
     public Model getModel() {
 
-        NIFVisitor nifVisitor = new NIF21CreateContext(bean.getContext(), bean);
+        NIF21Model model = new NIF21Model();
+
+        NIFBean bean = beans.get(0);
+        NIF21CreateContext nif21Context = new NIF21CreateContext(bean.getContext(), bean);
+
+
+        nif21Context.setModel(model.create());
+        NIFVisitor nifVisitor = nif21Context;
+
         accept(nifVisitor);
 
+        for (int i = 1; i < beans.size(); i++) {
+            nif21Context.setBean(beans.get(i));
+            accept(nifVisitor);
+        }
         return nifVisitor.getModel();
+
     }
 
     public String getNTriples() {

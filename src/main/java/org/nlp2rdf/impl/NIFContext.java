@@ -9,7 +9,7 @@ public class NIFContext {
 
     private int endIndex;
 
-    public NIFContext(String baseURI, int beginIndex, int endIndex) {
+    public NIFContext(String baseURI, Integer beginIndex, Integer endIndex) {
         this.baseURI = baseURI;
         this.beginIndex = beginIndex;
         this.endIndex = endIndex;
@@ -22,5 +22,14 @@ public class NIFContext {
     public String getCollection() {
         return String.format("%s#collection", baseURI);
     }
+
+    public Integer getBeginIndex() {
+        return beginIndex;
+    }
+
+    public Integer getEndIndex() {
+        return endIndex;
+    }
+
 
 }
