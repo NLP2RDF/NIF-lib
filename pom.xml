@@ -154,6 +154,7 @@
                 <version>4.2.0</version>
                 <configuration>
                     <repoToken>Q9LhiKxeU4W5MTBqF8f9ILmSwQq4Xk5nh</repoToken>
+                    <sourceEncoding>UTF-8</sourceEncoding>
                 </configuration>
             </plugin>
         </plugins>
