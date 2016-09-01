@@ -1,8 +1,6 @@
 ## NIF library
 
-[![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib)
-
-[![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF-lib/badge.svg?branch=master)](https://coveralls.io/github/sandroacoelho/NIF-lib?branch=master)
+[![RDFUnit](https://img.shields.io/badge/RDFUnit-compliance-brightgreen.svg)](https://github.com/AKSW/RDFUnit) [![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib) [![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF-lib/badge.svg?branch=master)](https://coveralls.io/github/sandroacoelho/NIF-lib?branch=master)
 
 ## What is NIF (NLP Interchange Format) ?
 

@@ -29,4 +29,4 @@ notifications:
     on_failure: change
 
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn site cobertura:cobertura coveralls:report
