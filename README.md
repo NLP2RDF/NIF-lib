@@ -1,6 +1,6 @@
 ## NIF library
 
-[![Build Status](https://travis-ci.org/sandroacoelho/NIF.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF)
+[![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib)
 
 ## What is NIF (NLP Interchange Format) ?
 
