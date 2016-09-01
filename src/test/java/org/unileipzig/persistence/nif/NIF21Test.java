@@ -1,4 +1,4 @@
-package org.nlp2rdf.business;
+package org.unileipzig.persistence.nif;
 
 
 import org.aksw.rdfunit.enums.TestCaseExecutionType;
@@ -12,79 +12,80 @@ import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator;
 import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.nlp2rdf.bean.NIFBean;
+import org.unileipzig.persistence.nif.impl.NIF20;
+import org.unileipzig.persistence.nif.impl.NIF21;
+import org.unileipzig.persistence.nif.impl.NIFBean;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
-public class NIFManagerTest {
+public class NIF21Test {
 
-    private List<NIFBean> getBeans() {
-        List<NIFBean> result = new ArrayList<NIFBean>();
+    private NIFBean getBean() {
 
-        NIFBean bean = new NIFBean();
-        bean.setContent("Berlin is the capital of Germany and one of the 16 states of Germany.");
-        bean.setResource("http://dbpedia.org/page/Berlin");
-        bean.setURL("http://dbpedia.org/page/Berlin");
-        bean.setResourceTypes(Arrays.asList("DBpedia:Place", "DBpedia:Location"));
-        bean.setOffset(1);
-        bean.setSize(6);
+        List<String> types = new ArrayList<String>();
+        types.add("http://dbpedia.org/ontology/Person");
+        types.add("http://dbpedia.org/ontology/SportsManager");
+        types.add("http://dbpedia.org/ontology/SoccerManager");
+        types.add("http://nerd.eurecom.fr/ontology#Person");
 
 
-        result.add(bean);
+        NIFBean.NIFBeanBuilder builder = new NIFBean.NIFBeanBuilder();
+        builder.context("http://freme-project.eu", 0, 22).mention("Diego Maradona").beginIndex(0).endIndex(14)
+                .taIdentRef("http://dbpedia.org/resource/Diego_Maradona").score(0.9869992701528016)
+                .annotator("http://freme-project.eu/tools/freme-ner")
+                .types(types);
+        NIFBean bean = new NIFBean(builder);
 
-        bean = new NIFBean();
-        bean.setContent("Berlin is the capital of Germany and one of the 16 states of Germany.");
-        bean.setResourceTypes(Arrays.asList("DBpedia:Place", "DBpedia:Location"));
-        bean.setResource("http://dbpedia.org/page/Germany");
-        bean.setURL("http://dbpedia.org/page/Germany");
-        bean.setOffset(61);
-        bean.setSize(7);
-        result.add(bean);
-
-        return result;
+        return bean;
     }
 
     @Test
     public void testGenerateNTriples() {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
 
         //Act
-        NIFManager.build(beans).getNTriples();
+        NIF nif21 = new NIF21(bean);
+        System.out.println(nif21.getNTriples());
     }
 
     @Test
     public void testGenerateRDFxml() {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
 
         //Act
-        NIFManager.build(beans).getRDFxml();
+        NIF nif21 = new NIF21(bean);
+        nif21.getRDFxml();
     }
 
     @Test
     public void testGenerateTurtle() {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
 
         //Act
-        NIFManager.build(beans).getTurtle();
+        NIF nif21 = new NIF21(bean);
+        nif21.getTurtle();
     }
 
     @Test
     public void testIsomorphicRdfResults() throws RdfReaderException {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
 
         //Act
-        String turtle = NIFManager.build(beans).getTurtle();
+        NIF nif21 = new NIF21(bean);
+        String turtle = nif21.getTurtle();
+
+        //Assert
         Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
     }
 
@@ -92,13 +93,15 @@ public class NIFManagerTest {
     @Test
     public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
 
         //Act
-        String turtle = NIFManager.build(beans).getTurtle();
+        NIF nif21 = new NIF21(bean);
+        String turtle = nif21.getTurtle();
+
         Model modelTtl = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
 
-        String ntriples = NIFManager.build(beans).getNTriples();
+        String ntriples = nif21.getNTriples();
         Model modelNt = RdfReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
 
         //Assert
@@ -107,17 +110,17 @@ public class NIFManagerTest {
     }
 
 
-
     @Test
     public void testIfNTisIsomorphicWithXml() throws RdfReaderException, TestCaseInstantiationException {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
 
         //Act
-        String rdfXml = NIFManager.build(beans).getRDFxml();
+        NIF nif21 = new NIF21(bean);
+        String rdfXml = nif21.getRDFxml();
         Model modelXml = RdfReaderFactory.createReaderFromText(rdfXml, Lang.RDFXML.getName()).read();
 
-        String ntriples = NIFManager.build(beans).getNTriples();
+        String ntriples = nif21.getNTriples();
         Model modelNt = RdfReaderFactory.createReaderFromText(ntriples, Lang.NTRIPLES.getName()).read();
 
         //Assert
@@ -127,25 +130,27 @@ public class NIFManagerTest {
 
 
     @Test
+    @Ignore
     public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
-        List<NIFBean> beans = getBeans();
+        NIFBean bean = getBean();
         DatasetOverviewResults overviewResults = new DatasetOverviewResults();
 
 
         //Act
-        String turtle = NIFManager.build(beans).getNTriples();
+        NIF nif21 = new NIF21(bean);
+        String turtle = nif21.getTurtle();
 
-       Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
+        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.NTRIPLES.getName()).read();
         RDFUnitStaticValidator.initWrapper(
                 new RDFUnitTestSuiteGenerator.Builder()
-                        .addLocalResourceOrSchemaURI("nif", "org/uni-leipzig/persistence/nlp2rdf/nif-core/nif-core.ttl", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#")
+                        .addLocalResourceOrSchemaURI("org/unileipzig/persistence/nif", "org/uni-leipzig/persistence/nlp2rdf/org.unileipzig.persistence.nif-core/org.unileipzig.persistence.nif-core.ttl", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core#")
                         .build()
         );
         TestExecution te = RDFUnitStaticValidator.validate(model, TestCaseExecutionType.shaclFullTestCaseResult);
 
         //Assert
-        for(TestCaseResult tcr : te.getTestCaseResults()) {
+        for (TestCaseResult tcr : te.getTestCaseResults()) {
             fail(tcr.getMessage());
         }
 

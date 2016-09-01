@@ -20,7 +20,7 @@
         <developer>
             <name>Sandro A. Coelho</name>
             <email>sandro.coelho@ice.ufjf.br</email>
-            <organization>DBpedia</organization>
+            <organization>AKSW / KILT Group </organization>
             <organizationUrl>http://persistence.uni-leipzig.org/nlp2rdf/</organizationUrl>
         </developer>
     </developers>
@@ -40,11 +40,12 @@
     </scm>
 
     <properties>
-        <jena.version>3.0.1</jena.version>
-        <jena.iri.version>3.0.1</jena.iri.version>
+        <jena.version>3.1.0</jena.version>
+        <jena.iri.version>3.1.0</jena.iri.version>
         <log4j.version>1.2.17</log4j.version>
         <junit.version>4.12</junit.version>
-        <rdfunit.version>0.7.21-SNAPSHOT</rdfunit.version>
+        <rdfunit.version>0.8</rdfunit.version>
+        <java.version>1.7</java.version>
     </properties>
 
     <dependencies>
@@ -58,12 +59,6 @@
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-core</artifactId>
             <version>${jena.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-arq</artifactId>
-            <version>${jena.iri.version}</version>
         </dependency>
 
         <dependency>

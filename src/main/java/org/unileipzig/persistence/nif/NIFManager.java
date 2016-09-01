@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.nlp2rdf.business;
+package org.unileipzig.persistence.nif;
 
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
