@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib)
 
+[![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF/badge.svg)](https://coveralls.io/github/sandroacoelho/NIF)
+
 ## What is NIF (NLP Interchange Format) ?
 
 The NLP Interchange Format (NIF) is an RDF/OWL-based format that aims to achieve interoperability between Natural Language Processing (NLP) tools, language resources and annotations. NIF consists of specifications, ontologies and software (overview), which are combined under the version identifier "NIF 2.0".
