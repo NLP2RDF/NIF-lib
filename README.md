@@ -78,21 +78,23 @@ NIFBean beanContext = new NIFBean(builderContext);
 5) Finally, get the output with the format that you need 
 
 ```
-  JSON-LD - nif.getJSONLD() 
+  nif.getJSONLD("Path for NIF Context");  //JSON-LD  
  
-  Turtle  - nif.getTurtle() 
+  nif.getTurtle(); //Turtle 
   
-  RDF-xml - nif.getRDFxml()
+  nif.getRDFxml(); //RDF-xml
   
-  NTriples - nif.getNTriples()
+  nif.getNTriples(); //NTriples
 
 
 ```
 
 
-
-
 ## Issues
 
 If you have any problems with or questions about this library, please contact us through a [GitHub issue](https://github.com/sandroacoelho/NIF/issues).
+
+## Maintainers
+
+<a href="http://infai.org"><img src="http://infai.org/de/Aktuelles/files?get=10_jahre_infai_gold.PNG" align="left" height="20%" width="20%" ></a>
 
