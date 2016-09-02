@@ -1,4 +1,4 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.bean;
 
 import org.nlp2rdf.validator.NIFBeanContextValidator;
 import org.nlp2rdf.validator.NIFBeanNumbersValidator;
@@ -304,4 +304,5 @@ public class NIFBean implements NIFMessagesException {
         }
 
     }
+
 }

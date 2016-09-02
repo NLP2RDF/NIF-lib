@@ -1,0 +1,20 @@
+{
+	"@context": "$contextJSON",
+	"graph": [
+	        #foreach( $bean in $beans)
+	        {
+            "@id":  "$bean.context.baseURI#char=$bean.context.NIF20",
+    		"@type": [ "$bean.types"],
+    		"nif:anchorOf" : "$bean.mention",
+    		"beginIndex": "$bean.beginIndex",
+    		"endIndex": "$bean.endIndex",
+    		"referenceContext": "$bean.referenceContext",
+    		"taClassRef": ["$bean.types"],
+    		"taIdentRef": "$bean.taIdentRef",
+			"taConfidence": "$bean.score"
+    	    }#if( $foreach.hasNext ),
+           #end
+          #end
+
+	]
+}

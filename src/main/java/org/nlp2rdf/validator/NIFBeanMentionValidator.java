@@ -2,8 +2,8 @@ package org.nlp2rdf.validator;
 
 
 import org.nlp2rdf.exception.NIFException;
-import org.nlp2rdf.impl.NIFBean;
-import org.nlp2rdf.impl.NIFType;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.bean.NIFType;
 
 import java.util.List;
 

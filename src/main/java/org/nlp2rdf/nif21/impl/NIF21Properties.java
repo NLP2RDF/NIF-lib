@@ -1,35 +1,51 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif21.impl;
 
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
-import org.nlp2rdf.NIF20Format;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.bean.NIFContext;
+import org.nlp2rdf.nif21.NIF21Format;
 import org.nlp2rdf.NIFProperties;
 import org.nlp2rdf.NIFVisitor;
 
-public class NIF20Properties implements NIFProperties, NIF20Format {
+public class NIF21Properties implements NIFProperties, NIF21Format {
 
 
     public void add(Model model, NIFBean entity) {
 
         if (model != null && entity != null) {
-            Resource contextRes = model.getResource(entity.getContext().context(CONTEXT_FORMAT));
+            Resource contextRes = model.getResource(entity.getContext().getNIF21());
 
             if (entity.isMention()) {
                 fillMention(model, entity, contextRes);
-
             } else if (entity.isContext()) {
-
+                fillResourceCollection(model, entity.getContext());
                 fillContext(model, contextRes);
             }
         }
     }
 
+
+    private void fillResourceCollection(Model model, NIFContext context) {
+
+        Resource resource = model.getResource(context.getCollection());
+
+        resource.addProperty(RDF.type, model.createResource(NIF_PROPERTY_CONTEXT_COLLECTION));
+
+        resource.addProperty(
+                model.createProperty(NIF_PROPERTY_HAS_CONTEXT),
+                model.createResource(context.getNIF21()));
+
+
+        resource.addProperty(
+                model.createProperty(NIF_PROPERTY_CONFORMS_TO),
+                model.createResource(context.getNIF21()));
+    }
+
     private void fillContext(Model model, Resource contextRes) {
-        contextRes.addProperty(
-                RDF.type,
-                model.createResource(NIF_PROPERTY_STRING));
+
 
         contextRes.addProperty(
                 RDF.type,
@@ -37,42 +53,24 @@ public class NIF20Properties implements NIFProperties, NIF20Format {
 
         contextRes.addProperty(
                 RDF.type,
-                model.createResource(NIF_PROPERTY_RFC5147));
+                model.createResource(NIF_PROPERTY_OFFSETBASEDSTRING));
+
     }
 
     private void fillMention(Model model, NIFBean entity, Resource contextRes) {
 
         contextRes.addProperty(
                 RDF.type,
-                model.createResource(NIF_PROPERTY_WORD));
+                model.createResource(NIF_PROPERTY_OFFSETBASEDSTRING));
 
         contextRes.addProperty(
                 RDF.type,
                 model.createResource(NIF_PROPERTY_PHRASE));
+
         contextRes.addProperty(
                 model.createProperty(NIF_PROPERTY_REFERENCE_CONTEXT),
                 model.createResource(entity.getReferenceContext()));
 
-        if (entity.hasTaIdentRef()) {
-            contextRes.addProperty(
-                    model.createProperty(RDF_PROPERTY_IDENTREF),
-                    model.createResource(entity.getTaIdentRef()));
-        }
-
-        if (entity.hasTypes()) {
-            for (String type : entity.getTypes()) {
-                contextRes.addProperty(
-                        model.createProperty(RDF_PROPERTY_CLASS_REF),
-                        model.createResource(type));
-            }
-        }
-        contextRes.addProperty(
-                RDF.type,
-                model.createResource(NIF_PROPERTY_STRING));
-
-        contextRes.addProperty(
-                RDF.type,
-                model.createResource(NIF_PROPERTY_RFC5147));
     }
 
 

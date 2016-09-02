@@ -2,7 +2,7 @@ package org.nlp2rdf;
 
 
 import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.impl.NIFContext;
+import org.nlp2rdf.bean.NIFContext;
 
 
 public interface NIFResource extends NIFFormat {

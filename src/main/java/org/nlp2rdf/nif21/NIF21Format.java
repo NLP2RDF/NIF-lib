@@ -1,4 +1,6 @@
-package org.nlp2rdf;
+package org.nlp2rdf.nif21;
+
+import org.nlp2rdf.NIFFormat;
 
 public interface NIF21Format extends NIFFormat {
 
@@ -32,8 +34,6 @@ public interface NIF21Format extends NIFFormat {
 
     String NIF_PROPERTY_ENDINDEX = NIF_CORE_PREFIX.concat("endIndex");
 
-    String NIF_PROPERTY_ANCHOR_OF = NIF_CORE_PREFIX.concat("anchorOf");
-
     String NIF_PROPERTY_CONTEXT_COLLECTION = NIF_CORE_PREFIX.concat("ContextCollection");
 
     String NIF_PROPERTY_REFERENCE_CONTEXT = NIF_CORE_PREFIX.concat("referenceContext");
@@ -45,5 +45,7 @@ public interface NIF21Format extends NIFFormat {
     String NIF_PROPERTY_HAS_CONTEXT = NIF_CORE_PREFIX.concat("hasContext");
 
     String CONTEXT_FORMAT = "%s#offset_%d_%d";
+
+    String TEMPLATE_FREME_PATH = "./src/main/resources/templates/nif-21.vm";
 
 }

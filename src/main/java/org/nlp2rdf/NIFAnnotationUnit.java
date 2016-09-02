@@ -1,7 +1,8 @@
 package org.nlp2rdf;
 
 import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.impl.NIFBean;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.nif21.NIF21Format;
 
 public interface NIFAnnotationUnit extends NIF21Format {
 

@@ -1,0 +1,23 @@
+{
+    "@context": "$contextJSON",
+    "graph": [
+	        #foreach( $bean in $beans)
+	        {
+    		"@id":  "$bean.context.NIF21",
+    		"@type": [ "String", "Word", "Phrase", "OffsetBasedString"],
+    		"annotationUnit" : [
+                                "taAnnotatorsRef" : "$bean.annotator",
+                                "taClassRef": ["$bean.types"],
+                                "taConfidence": ["$bean.score"],
+    		                    "taIdentRef": "$bean.taIdentRef",
+                               ],
+            "nif:isString" : "$bean.mention",
+            "beginIndex": "$bean.beginIndex",
+            "endIndex": "$bean.endIndex",
+            "referenceContext": "$bean.referenceContext",
+    	    }#if( $foreach.hasNext ),
+           #end
+          #end
+
+    ]
+}

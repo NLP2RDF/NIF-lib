@@ -1,8 +1,9 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif21.impl;
 
 
 import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.NIF21Format;
+import org.nlp2rdf.bean.NIFContext;
+import org.nlp2rdf.nif21.NIF21Format;
 import org.nlp2rdf.NIFResource;
 import org.nlp2rdf.NIFVisitor;
 
@@ -13,7 +14,7 @@ public class NIF21Resource implements NIFResource, NIF21Format {
 
             model.createResource(context.getCollection());
 
-            model.createResource(context.context(CONTEXT_FORMAT));
+            model.createResource(context.getNIF21());
         }
     }
 

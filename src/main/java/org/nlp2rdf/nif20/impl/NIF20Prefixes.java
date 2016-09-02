@@ -1,8 +1,8 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif20.impl;
 
 
 import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.NIF20Format;
+import org.nlp2rdf.nif20.NIF20Format;
 import org.nlp2rdf.NIFPrefixes;
 import org.nlp2rdf.NIFVisitor;
 

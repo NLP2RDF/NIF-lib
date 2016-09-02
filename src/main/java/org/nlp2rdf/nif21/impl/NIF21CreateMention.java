@@ -1,16 +1,21 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif21.impl;
 
 import org.apache.jena.rdf.model.Model;
 import org.nlp2rdf.*;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.bean.NIFContext;
 
 
-public class NIF20CreateMention implements NIFVisitor {
+public class NIF21CreateMention implements NIFVisitor {
 
     private Model model;
 
+    private NIFContext context;
+
     private NIFBean entity;
 
-    public NIF20CreateMention(NIFBean entity) {
+    public NIF21CreateMention(NIFContext context, NIFBean entity) {
+        this.context = context;
         this.entity = entity;
     }
 
@@ -30,11 +35,12 @@ public class NIF20CreateMention implements NIFVisitor {
 
 
     public void visit(NIFResource resource) {
-        resource.add(model, entity.getContext());
+        resource.add(model, context);
     }
 
 
     public void visit(NIF21AnnotationUnit anotationUnit) {
+        anotationUnit.add(model, entity);
     }
 
 

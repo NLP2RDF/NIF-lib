@@ -1,17 +1,19 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif20.impl;
 
 import org.apache.jena.rdf.model.Model;
 import org.nlp2rdf.NIF;
-import org.nlp2rdf.NIF20Format;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.nif20.NIF20Format;
 import org.nlp2rdf.NIFFormat;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.formats.Conversor;
 import org.nlp2rdf.validator.NIFMessagesException;
 
 import java.util.List;
 import java.util.Objects;
 
 
-public class NIF20 extends Formats implements NIF20Format, NIFMessagesException, NIF {
+public class NIF20 extends Conversor implements NIF20Format, NIFMessagesException, NIF {
 
     private NIFFormat[] elements;
 
@@ -65,8 +67,11 @@ public class NIF20 extends Formats implements NIF20Format, NIFMessagesException,
         return super.getTurtle(getModel());
     }
 
-    public String getJSONLD() {
-        return "";
+    public String getJSONLD(String context) {
+
+        super.getNTriples(getModel());
+
+        return super.getJSONLD(context, beans, TEMPLATE_FREME_PATH);
     }
 
 

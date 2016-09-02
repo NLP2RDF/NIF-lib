@@ -2,7 +2,7 @@ package org.nlp2rdf;
 
 
 import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.impl.NIF21AnnotationUnit;
+import org.nlp2rdf.nif21.impl.NIF21AnnotationUnit;
 
 
 public interface NIFVisitor {

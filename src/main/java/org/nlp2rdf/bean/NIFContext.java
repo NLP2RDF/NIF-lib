@@ -1,5 +1,8 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.bean;
 
+
+import org.nlp2rdf.nif20.NIF20Format;
+import org.nlp2rdf.nif21.NIF21Format;
 
 public class NIFContext {
 
@@ -31,5 +34,11 @@ public class NIFContext {
         return endIndex;
     }
 
+    public String getNIF20() {
+        return context(NIF20Format.CONTEXT_FORMAT);
+    }
 
+    public String getNIF21() {
+        return context(NIF21Format.CONTEXT_FORMAT);
+    }
 }

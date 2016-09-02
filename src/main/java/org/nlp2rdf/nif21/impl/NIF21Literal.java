@@ -1,10 +1,11 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif21.impl;
 
 
 import org.apache.jena.datatypes.xsd.XSDDatatype;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
-import org.nlp2rdf.NIF21Format;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.nif21.NIF21Format;
 import org.nlp2rdf.NIFLiteral;
 import org.nlp2rdf.NIFVisitor;
 
@@ -15,7 +16,7 @@ public class NIF21Literal implements NIFLiteral, NIF21Format {
 
         if (model != null && entity != null) {
 
-            Resource contextRes = model.getResource(entity.getContext().context(CONTEXT_FORMAT));
+            Resource contextRes = model.getResource(entity.getContext().getNIF21());
 
             if (entity.isContext()) {
 
@@ -32,7 +33,7 @@ public class NIF21Literal implements NIFLiteral, NIF21Format {
             } else if (entity.isMention()) {
 
                 contextRes.addLiteral(
-                        model.createProperty(NIF_PROPERTY_ANCHOR_OF),
+                        model.createProperty(NIF_PROPERTY_ISSTRING),
                         entity.getMention());
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_BEGININDEX),

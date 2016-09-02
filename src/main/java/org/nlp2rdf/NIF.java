@@ -12,6 +12,6 @@ public interface NIF {
 
     String getTurtle();
 
-    String getJSONLD();
+    String getJSONLD(String context);
 
 }

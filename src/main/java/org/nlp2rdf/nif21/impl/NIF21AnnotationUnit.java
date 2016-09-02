@@ -1,10 +1,11 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif21.impl;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.vocabulary.RDF;
-import org.nlp2rdf.NIF21Format;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.nif21.NIF21Format;
 import org.nlp2rdf.NIFAnnotationUnit;
 import org.nlp2rdf.NIFVisitor;
 
@@ -18,7 +19,7 @@ public class NIF21AnnotationUnit implements NIFAnnotationUnit, NIF21Format {
     public void add(Model model, NIFBean entity) {
 
         if (model != null && entity != null && entity.isMention()) {
-            Resource contextRes = model.getResource(entity.getContext().context(CONTEXT_FORMAT));
+            Resource contextRes = model.getResource(entity.getContext().getNIF21());
 
             Resource unitRes = model.createResource().addProperty(RDF.type, ResourceFactory.createResource(NIF_PROPERTY_ENTITY_OCCURRENCE));
 

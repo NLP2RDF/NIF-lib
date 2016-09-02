@@ -1,15 +1,17 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.nif21.impl;
 
 import org.apache.jena.rdf.model.Model;
 import org.nlp2rdf.NIF;
-import org.nlp2rdf.NIF21Format;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.nif21.NIF21Format;
 import org.nlp2rdf.NIFFormat;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.formats.Conversor;
 
 import java.util.List;
 
 
-public class NIF21 extends Formats implements NIF21Format, NIF {
+public class NIF21 extends Conversor implements NIF21Format, NIF {
 
     NIFFormat[] elements;
 
@@ -56,8 +58,11 @@ public class NIF21 extends Formats implements NIF21Format, NIF {
         return super.getTurtle(getModel());
     }
 
-    public String getJSONLD() {
-        return null;
+    public String getJSONLD(String context) {
+
+        super.getNTriples(getModel());
+
+        return super.getJSONLD(context, beans, TEMPLATE_FREME_PATH);
     }
 
     public void accept(NIFVisitor visitor) {

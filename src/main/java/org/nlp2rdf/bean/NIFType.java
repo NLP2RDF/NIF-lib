@@ -1,4 +1,4 @@
-package org.nlp2rdf.impl;
+package org.nlp2rdf.bean;
 
 
 public enum NIFType {

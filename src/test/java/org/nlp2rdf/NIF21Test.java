@@ -13,9 +13,10 @@ import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.junit.Test;
-import org.nlp2rdf.impl.NIF21;
-import org.nlp2rdf.impl.NIFBean;
-import org.nlp2rdf.impl.NIFType;
+import org.nlp2rdf.nif20.impl.NIF20;
+import org.nlp2rdf.nif21.impl.NIF21;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.bean.NIFType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class NIF21Test {
         typesMention1.add("http://nerd.eurecom.fr/ontology#Location");
         typesMention1.add("http://dbpedia.org/ontology/Country");
 
-        builderMention1.context("http://freme-project.eu", 23, 32).mention("Argentina").beginIndex(0).endIndex(14)
+        builderMention1.context("http://freme-project.eu", 23, 32).mention("Argentina").beginIndex(23).endIndex(32)
                 .taIdentRef("http://dbpedia.org/resource/Argentina").score(0.9804963628413852)
                 .annotator("http://freme-project.eu/tools/freme-ner")
                 .types(typesMention1);
@@ -190,6 +191,17 @@ public class NIF21Test {
         for (TestCaseResult tcr : te.getTestCaseResults()) {
             fail(tcr.getMessage());
         }
+
+    }
+
+    @Test
+    public void testGenerateJSONLD() {
+        //Init
+        List<NIFBean> beans = getBean();
+
+        //Act
+        NIF nif21 = new NIF21(beans);
+        System.out.println(nif21.getJSONLD("http://www.freme-project.eu/context.jsonld"));
 
     }
 
