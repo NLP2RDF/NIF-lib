@@ -71,8 +71,6 @@ NIFBean beanContext = new NIFBean(builderContext);
      NIF nif = new NIF20(beans);   // For NIF 2.0
      
      NIF nif = new NIF21(beans);   // For NIF 2.1
-     
-
 ```
 
 5) Finally, get the output with the format that you need 
@@ -85,8 +83,6 @@ NIFBean beanContext = new NIFBean(builderContext);
   nif.getRDFxml(); //RDF-xml
   
   nif.getNTriples(); //NTriples
-
-
 ```
 
 
