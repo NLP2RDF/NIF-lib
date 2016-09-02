@@ -22,6 +22,9 @@ public class NIF21 extends Formats implements NIF21Format, NIF {
 
     public Model getModel() {
 
+        NIFBean.validate(beans);
+        NIFBean.fillBeansWithContext(beans, CONTEXT_FORMAT);
+
         NIF21Model model = new NIF21Model();
 
         NIFBean bean = beans.get(0);

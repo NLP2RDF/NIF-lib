@@ -1,11 +1,12 @@
 package org.nlp2rdf.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.nlp2rdf.validator.NIFBeanContextValidator;
+import org.nlp2rdf.validator.NIFBeanNumbersValidator;
+import org.nlp2rdf.validator.NIFMessagesException;
 
-public class NIFBean {
+import java.util.*;
+
+public class NIFBean implements NIFMessagesException {
 
     private NIFContext context;
 
@@ -18,7 +19,6 @@ public class NIFBean {
     private Integer endIndex;
 
     private NIFType nifType = NIFType.ENTITY;
-    ;
 
     private List<String> types;
 
@@ -32,27 +32,48 @@ public class NIFBean {
 
     public NIFBean(List<NIFBeanBuilder> builders) {
 
-        List<NIFBean> nifBeans = new ArrayList<NIFBean>();
+        List<NIFBean> nifBeans = new ArrayList<>();
 
         builders.forEach(builder -> nifBeans.add(new NIFBean(builder)));
     }
 
     public NIFBean(NIFBeanBuilder builder) {
         init();
-        this.context = builder.context;
-        this.mention = builder.mention;
-        this.beginIndex = builder.beginIndex;
-        this.endIndex = builder.endIndex;
-        this.nifType = builder.nifType;
-        this.types = builder.types;
-        this.score = builder.score;
-        this.taIdentRef = builder.taIdentRef;
-        this.referenceContext = builder.referenceContext;
-        this.annotator = builder.annotator;
+        setNifType(builder.nifType);
+        setContext(builder.context);
+        setMention(builder.mention);
+        setBeginIndex(builder.beginIndex);
+        setEndIndex(builder.endIndex);
+        setTypes(builder.types);
+        setScore(builder.score);
+        setTaIdentRef(builder.taIdentRef);
+        setReferenceContext(builder.referenceContext);
+        setAnnotator(builder.annotator);
+    }
+
+    public static void validate(List<NIFBean> beans) {
+
+        NIFBeanNumbersValidator.checkIfEndIndexIsGreaterThanBeginIndex(beans);
+        NIFBeanContextValidator.checkIfContextExists(beans);
+        NIFBeanContextValidator.checkIfHasDuplicatedContext(beans);
+
+    }
+
+    public static void fillBeansWithContext(List<NIFBean> beans, String CONTEXT_FORMAT) {
+
+        Optional<NIFBean> context = beans.stream().filter(bean -> NIFType.CONTEXT.equals(bean.getNifType())).findFirst();
+
+        if (context.isPresent()) {
+            beans.forEach(bean -> bean.setReferenceContext(context.get().getContext().context(CONTEXT_FORMAT)));
+        }
     }
 
     public Double getScore() {
         return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
     private void init() {
@@ -82,12 +103,31 @@ public class NIFBean {
         return mention;
     }
 
+    public void setMention(String mention) {
+        Objects.requireNonNull(mention, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_MENTION));
+        this.mention = mention;
+    }
+
     public Integer getBeginIndex() {
         return beginIndex;
     }
 
+    public void setBeginIndex(Integer beginIndex) {
+        if (isMention()) {
+            Objects.requireNonNull(beginIndex, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_BEGIN_INDEX));
+        }
+        this.beginIndex = beginIndex;
+    }
+
     public Integer getEndIndex() {
         return endIndex;
+    }
+
+    public void setEndIndex(Integer endIndex) {
+        if (isMention()) {
+            Objects.requireNonNull(beginIndex, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_END_INDEX));
+        }
+        this.endIndex = endIndex;
     }
 
     public Boolean isMention() {
@@ -102,20 +142,32 @@ public class NIFBean {
         return nifType;
     }
 
-    public Map<String, String> getEntityTypes() {
-        return entityTypes;
+    public void setNifType(NIFType nifType) {
+        this.nifType = nifType;
     }
 
     public String getTaIdentRef() {
         return taIdentRef;
     }
 
+    public void setTaIdentRef(String taIdentRef) {
+        this.taIdentRef = taIdentRef;
+    }
+
     public String getReferenceContext() {
         return referenceContext;
     }
 
+    public void setReferenceContext(String referenceContext) {
+        this.referenceContext = referenceContext;
+    }
+
     public List<String> getTypes() {
         return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 
     public NIFContext getContext() {
@@ -123,6 +175,7 @@ public class NIFBean {
     }
 
     public void setContext(NIFContext context) {
+        Objects.requireNonNull(context, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_CONTEXT));
         this.context = context;
     }
 
@@ -176,54 +229,72 @@ public class NIFBean {
 
 
         public NIFBeanBuilder context(String baseURI, int beginIndex, int endIndex) {
+            Objects.requireNonNull(baseURI, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_BASE_URI));
+
+            assert beginIndex >= 0 : String.format(NIF_DATA_VALUE_NON_NEGATIVE, NIF_DATA_BEGIN_INDEX);
+            assert endIndex >= 0 : String.format(NIF_DATA_VALUE_NON_NEGATIVE, NIF_DATA_END_INDEX);
+            assert endIndex > beginIndex : String.format(NIF_DATA_VALUE_MUST_BE_GREATER, NIF_DATA_BEGIN_INDEX,
+                    NIF_DATA_END_INDEX, NIF_DATA_CONTEXT);
+
             this.context = new NIFContext(baseURI, beginIndex, endIndex);
             return this;
         }
 
         public NIFBeanBuilder taIdentRef(String taIdentRef) {
+            Objects.requireNonNull(taIdentRef, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_TA_REFERENCE));
             this.taIdentRef = taIdentRef;
             return this;
         }
 
         public NIFBeanBuilder mention(String mention) {
+            Objects.requireNonNull(mention, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_MENTION));
             this.mention = mention;
             return this;
         }
 
         public NIFBeanBuilder beginIndex(Integer beginIndex) {
+            Objects.requireNonNull(beginIndex, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_BEGIN_INDEX));
+            assert beginIndex >= 0 : String.format(NIF_DATA_VALUE_NON_NEGATIVE, NIF_DATA_BEGIN_INDEX);
+
             this.beginIndex = beginIndex;
             return this;
         }
 
         public NIFBeanBuilder endIndex(Integer endIndex) {
+
+            Objects.requireNonNull(beginIndex, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_END_INDEX));
+            assert endIndex >= 0 : String.format(NIF_DATA_VALUE_NON_NEGATIVE, NIF_DATA_END_INDEX);
+
             this.endIndex = endIndex;
             return this;
         }
 
-
         public NIFBeanBuilder nifType(NIFType nifType) {
+
+            Objects.requireNonNull(nifType, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_TYPE));
             this.nifType = nifType;
             return this;
         }
 
-
         public NIFBeanBuilder types(List<String> types) {
-            this.types = types;
+            this.types = types == null ? new ArrayList<>(1) : types;
             return this;
         }
 
-
         public NIFBeanBuilder score(Double score) {
+            Objects.requireNonNull(score, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_SCORE));
             this.score = score;
             return this;
         }
 
         public NIFBeanBuilder referenceContext(String referenceContext) {
+            Objects.requireNonNull(referenceContext, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_REFERENCE_CONTEXT));
             this.referenceContext = referenceContext;
             return this;
         }
 
         public NIFBeanBuilder annotator(String annotator) {
+            Objects.requireNonNull(annotator, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_REFERENCE_ANNOTATOR));
             this.annotator = annotator;
             return this;
         }
@@ -231,7 +302,6 @@ public class NIFBean {
         public NIFBean build() {
             return new NIFBean(this);
         }
-
 
     }
 }

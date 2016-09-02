@@ -23,8 +23,6 @@ public class NIF20Properties implements NIFProperties, NIF20Format {
 
                 fillContext(model, contextRes);
             }
-
-
         }
     }
 
