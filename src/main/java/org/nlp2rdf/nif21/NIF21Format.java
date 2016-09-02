@@ -46,6 +46,8 @@ public interface NIF21Format extends NIFFormat {
 
     String CONTEXT_FORMAT = "%s#offset_%d_%d";
 
-    String TEMPLATE_FREME_PATH = "./src/main/resources/templates/nif-21.vm";
+    String TEMPLATE_NIF_PATH = "./src/main/resources/templates/nif-21.vm";
+
+    String TEMPLATE_CONTEXT_PATH = "./src/main/resources/templates/json-ld-context.vm";
 
 }

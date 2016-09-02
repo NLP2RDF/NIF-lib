@@ -41,7 +41,7 @@ public class NIF21Properties implements NIFProperties, NIF21Format {
 
         resource.addProperty(
                 model.createProperty(NIF_PROPERTY_CONFORMS_TO),
-                model.createResource(context.getNIF21()));
+                model.createResource(NIF_21));
     }
 
     private void fillContext(Model model, Resource contextRes) {

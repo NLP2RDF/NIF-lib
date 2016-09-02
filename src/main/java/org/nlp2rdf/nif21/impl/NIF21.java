@@ -1,6 +1,7 @@
 package org.nlp2rdf.nif21.impl;
 
 import org.apache.jena.rdf.model.Model;
+import org.nlp2rdf.ContextJSONLD;
 import org.nlp2rdf.NIF;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.nif21.NIF21Format;
@@ -11,11 +12,14 @@ import org.nlp2rdf.formats.Conversor;
 import java.util.List;
 
 
-public class NIF21 extends Conversor implements NIF21Format, NIF {
+public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD {
 
     NIFFormat[] elements;
 
     private List<NIFBean> beans;
+
+    public NIF21() {
+    }
 
     public NIF21(List<NIFBean> beans) {
         this.elements = new NIFFormat[]{new NIF21Resource(), new NIF21Prefixes(), new NIF21Properties(), new NIF21Literal(), new NIF21AnnotationUnit()};
@@ -62,7 +66,12 @@ public class NIF21 extends Conversor implements NIF21Format, NIF {
 
         super.getNTriples(getModel());
 
-        return super.getJSONLD(context, beans, TEMPLATE_FREME_PATH);
+        return super.getJSONLD(context, beans, TEMPLATE_NIF_PATH);
+    }
+
+    @Override
+    public String getContextForJSONLD(List<String> ontologies) {
+        return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH);
     }
 
     public void accept(NIFVisitor visitor) {

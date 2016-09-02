@@ -36,5 +36,7 @@ public interface NIF20Format {
 
     String CONTEXT_FORMAT = "%s#char=%d,%d";
 
-    String TEMPLATE_FREME_PATH = "./src/main/resources/templates/nif-20.vm";
+    String TEMPLATE_NIF_PATH = "./src/main/resources/templates/nif-20.vm";
+
+    String TEMPLATE_CONTEXT_PATH = "./src/main/resources/templates/json-ld-context.vm";
 }

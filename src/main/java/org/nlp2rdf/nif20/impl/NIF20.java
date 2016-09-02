@@ -1,6 +1,7 @@
 package org.nlp2rdf.nif20.impl;
 
 import org.apache.jena.rdf.model.Model;
+import org.nlp2rdf.ContextJSONLD;
 import org.nlp2rdf.NIF;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.nif20.NIF20Format;
@@ -13,11 +14,14 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class NIF20 extends Conversor implements NIF20Format, NIFMessagesException, NIF {
+public class NIF20 extends Conversor implements NIF20Format, NIFMessagesException, NIF, ContextJSONLD {
 
     private NIFFormat[] elements;
 
     private List<NIFBean> beans;
+
+    public NIF20() {
+    }
 
     public NIF20(List<NIFBean> beans) {
         Objects.requireNonNull(beans, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_BEANS));
@@ -71,7 +75,12 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
 
         super.getNTriples(getModel());
 
-        return super.getJSONLD(context, beans, TEMPLATE_FREME_PATH);
+        return super.getJSONLD(context, beans, TEMPLATE_NIF_PATH);
+    }
+
+    @Override
+    public String getContextForJSONLD(List<String> ontologies) {
+        return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH);
     }
 
 

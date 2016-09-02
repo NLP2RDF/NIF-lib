@@ -9,6 +9,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.bean.NIFJSONLDContext;
 import org.nlp2rdf.bean.NIFType;
 
 import java.io.IOException;
@@ -103,5 +104,28 @@ public class Conversor {
         }
 
         return result;
+    }
+
+    protected String getContextForJSONLD(List<String> ontologies, String templatePath) {
+
+        VelocityEngine velocityEngine = new VelocityEngine();
+        velocityEngine.init();
+
+        Template template = velocityEngine.getTemplate(templatePath);
+        Context context = new VelocityContext();
+
+        context.put("contextBeans", new NIFJSONLDContext().convertToBeans(ontologies));
+
+        StringWriter sw = new StringWriter();
+        template.merge(context, sw);
+        String result = sw.toString();
+        try {
+            sw.close();
+        } catch (IOException e) {
+        }
+
+        return result;
+
+
     }
 }

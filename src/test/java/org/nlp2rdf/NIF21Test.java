@@ -205,4 +205,19 @@ public class NIF21Test {
 
     }
 
+    @Test
+    public void testGenerateJSONLDContext() {
+
+        //Init
+        ContextJSONLD context = new NIF21();
+        List<String>  ontologies = new ArrayList<>();
+
+        ontologies.add("http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#");
+
+        //Act
+
+        System.out.println(context.getContextForJSONLD(ontologies));
+
+    }
+
 }
