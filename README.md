@@ -1,6 +1,8 @@
 ## NIF library
 
 [![RDFUnit](https://img.shields.io/badge/RDFUnit-compliance-brightgreen.svg)](https://github.com/AKSW/RDFUnit) [![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib) [![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF-lib/badge.svg?branch=master)](https://coveralls.io/github/sandroacoelho/NIF-lib?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1583bf0c334842a3846a33a4b1162632)](https://www.codacy.com/app/sandroacoelho/NIF-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sandroacoelho/NIF-lib&amp;utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/09126edf-2462-436b-8045-78de67d01ef2)](https://codebeat.co/projects/github-com-sandroacoelho-nif-lib)
 
 ## What is NIF (NLP Interchange Format) ?
 
