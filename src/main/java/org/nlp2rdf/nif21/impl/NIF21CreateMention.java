@@ -31,6 +31,7 @@ public class NIF21CreateMention implements NIFVisitor {
 
 
     public void visit(NIFPrefixes prefixes) {
+        return;
     }
 
 
@@ -46,7 +47,6 @@ public class NIF21CreateMention implements NIFVisitor {
 
     public void visit(NIFProperties properties) {
         properties.add(model, entity);
-
     }
 
 
