@@ -45,6 +45,7 @@ public class NIF20CreateContext implements NIFVisitor {
     }
 
     public void visit(NIF21AnnotationUnit anotationUnit) {
+        return;
     }
 
     public void visit(NIFProperties properties) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD {
 
-    NIFFormat[] elements;
+    private NIFFormat[] elements;
 
     private List<NIFBean> beans;
 
