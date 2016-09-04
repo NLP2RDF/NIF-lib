@@ -24,16 +24,7 @@ public class Conversor {
      * @return
      */
     protected String getRDFxml(Model model) {
-        StringWriter sw = new StringWriter();
-        RDFDataMgr.write(sw, model, Lang.RDFXML);
-        String result = sw.toString();
-        try {
-            sw.close();
-        } catch (IOException e) {
-        }
-
-        return result;
-
+        return getModelAsStringByFormat(model, Lang.RDFXML);
     }
 
     /**
@@ -42,16 +33,7 @@ public class Conversor {
      * @return
      */
     protected String getNTriples(Model model) {
-        StringWriter sw = new StringWriter();
-        RDFDataMgr.write(sw, model, Lang.NTRIPLES);
-        String result = sw.toString();
-        try {
-            sw.close();
-        } catch (IOException e) {
-        }
-
-        return result;
-
+        return getModelAsStringByFormat(model, Lang.NTRIPLES);
     }
 
     /**
@@ -60,8 +42,12 @@ public class Conversor {
      * @return
      */
     protected String getTurtle(Model model) {
+        return getModelAsStringByFormat(model, Lang.TURTLE);
+    }
+
+    private String getModelAsStringByFormat(Model model, Lang lang) {
         StringWriter sw = new StringWriter();
-        RDFDataMgr.write(sw, model, Lang.TURTLE);
+        RDFDataMgr.write(sw, model, lang);
         String result = sw.toString();
         try {
             sw.close();
@@ -69,7 +55,6 @@ public class Conversor {
         }
 
         return result;
-
     }
 
     /**
@@ -81,41 +66,52 @@ public class Conversor {
      */
     protected String getJSONLD(String contextJSON, List<NIFBean> beans, String templatePath) {
 
-        VelocityEngine velocityEngine = new VelocityEngine();
-        velocityEngine.init();
+        VelocityEngine velocityEngine = getVelocityEngine();
 
         Template template = velocityEngine.getTemplate(templatePath);
         Context context = new VelocityContext();
 
-
-        NIFBean nifContext = beans.stream().filter(bean -> NIFType.CONTEXT.equals(bean.getNifType())).findFirst().get();
-        beans.remove(nifContext);
-
+        removeNIFContext(beans);
 
         context.put("contextJSON", contextJSON);
         context.put("beans", beans);
 
-        StringWriter sw = new StringWriter();
-        template.merge(context, sw);
-        String result = sw.toString();
-        try {
-            sw.close();
-        } catch (IOException e) {
-        }
+        String result = getStringFromVelocity(template, context);
 
         return result;
     }
 
-    protected String getContextForJSONLD(List<String> ontologies, String templatePath) {
+    private void removeNIFContext(List<NIFBean> beans) {
+        NIFBean nifContext = beans.stream().filter(bean -> NIFType.CONTEXT.equals(bean.getNifType())).findFirst().get();
+        beans.remove(nifContext);
+    }
 
+    private VelocityEngine getVelocityEngine() {
         VelocityEngine velocityEngine = new VelocityEngine();
+
         velocityEngine.init();
 
+        return velocityEngine;
+    }
+
+    protected String getContextForJSONLD(List<String> ontologies, String templatePath) {
+
+        VelocityEngine velocityEngine = getVelocityEngine();
+
         Template template = velocityEngine.getTemplate(templatePath);
+
         Context context = new VelocityContext();
 
         context.put("contextBeans", new NIFJSONLDContext().convertToBeans(ontologies));
 
+        String result = getStringFromVelocity(template, context);
+
+        return result;
+
+
+    }
+
+    private String getStringFromVelocity(Template template, Context context) {
         StringWriter sw = new StringWriter();
         template.merge(context, sw);
         String result = sw.toString();
@@ -123,9 +119,6 @@ public class Conversor {
             sw.close();
         } catch (IOException e) {
         }
-
         return result;
-
-
     }
 }
