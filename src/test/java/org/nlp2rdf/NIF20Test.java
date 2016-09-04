@@ -13,9 +13,9 @@ import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.junit.Test;
-import org.nlp2rdf.nif20.impl.NIF20;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFType;
+import org.nlp2rdf.nif20.impl.NIF20;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,7 @@ public class NIF20Test {
         String turtle = nif20.getTurtle();
 
         //Assert
-        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+        RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
     }
 
 
@@ -170,8 +170,6 @@ public class NIF20Test {
     public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
-        DatasetOverviewResults overviewResults = new DatasetOverviewResults();
-
 
         //Act
         NIF nif20 = new NIF20(beans);

@@ -124,7 +124,7 @@ public class NIF21Test {
         String turtle = nif20.getTurtle();
 
         //Assert
-        Model model = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
+        RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
     }
 
 
@@ -171,7 +171,6 @@ public class NIF21Test {
     public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
-        DatasetOverviewResults overviewResults = new DatasetOverviewResults();
 
 
         //Act
