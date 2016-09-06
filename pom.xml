@@ -45,6 +45,7 @@
         <junit.version>4.12</junit.version>
         <rdfunit.version>0.8</rdfunit.version>
         <velocity.version>1.7</velocity.version>
+        <aksw.keyname>AKSW.GPG</aksw.keyname>
     </properties>
 
     <dependencies>
@@ -119,6 +120,11 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <!--<configuration>
+                                    <keyname>AKSW</keyname>
+                                    <passphraseServerId>${aksw.keyname}</passphraseServerId>
+                                </configuration>
+                                 -->
                             </execution>
                         </executions>
                     </plugin>
@@ -178,5 +184,17 @@
             </plugin>
         </plugins>
     </reporting>
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 </project>
