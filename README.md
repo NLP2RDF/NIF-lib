@@ -1,5 +1,5 @@
 ## NIF library
-
+[![maven-central](https://img.shields.io/badge/maven--central-0.3-blue.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.nlp2rdf%22)
 [![RDFUnit](https://img.shields.io/badge/RDFUnit-compliance-brightgreen.svg)](https://github.com/AKSW/RDFUnit) [![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib) [![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF-lib/badge.svg?branch=master)](https://coveralls.io/github/sandroacoelho/NIF-lib?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/eef8ff92daa34394ab90fea368a2d639)](https://www.codacy.com/app/sandroacoelho/NIF-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sandroacoelho/NIF-lib&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/09126edf-2462-436b-8045-78de67d01ef2)](https://codebeat.co/projects/github-com-sandroacoelho-nif-lib)
