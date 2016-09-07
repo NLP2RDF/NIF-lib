@@ -1,11 +1,11 @@
 package org.nlp2rdf.nif21.impl;
 
 
-import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.bean.NIFContext;
-import org.nlp2rdf.nif21.NIF21Format;
+import com.hp.hpl.jena.rdf.model.Model;
 import org.nlp2rdf.NIFResource;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.bean.NIFContext;
+import org.nlp2rdf.nif21.NIF21Format;
 
 public class NIF21Resource implements NIFResource, NIF21Format {
 

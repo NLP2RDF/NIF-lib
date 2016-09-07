@@ -1,9 +1,10 @@
 package org.nlp2rdf.nif21.impl;
 
-import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.nif21.NIF21Format;
+
+import com.hp.hpl.jena.rdf.model.Model;
 import org.nlp2rdf.NIFPrefixes;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.nif21.NIF21Format;
 
 public class NIF21Prefixes implements NIFPrefixes, NIF21Format {
 

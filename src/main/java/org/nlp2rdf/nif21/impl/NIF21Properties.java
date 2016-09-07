@@ -1,14 +1,14 @@
 package org.nlp2rdf.nif21.impl;
 
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.RDF;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
+import org.nlp2rdf.NIFProperties;
+import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFContext;
 import org.nlp2rdf.nif21.NIF21Format;
-import org.nlp2rdf.NIFProperties;
-import org.nlp2rdf.NIFVisitor;
 
 public class NIF21Properties implements NIFProperties, NIF21Format {
 

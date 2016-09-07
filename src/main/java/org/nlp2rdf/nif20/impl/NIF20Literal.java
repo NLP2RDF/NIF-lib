@@ -1,13 +1,13 @@
 package org.nlp2rdf.nif20.impl;
 
-
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
-import org.nlp2rdf.bean.NIFBean;
-import org.nlp2rdf.nif20.NIF20Format;
+;
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
 import org.nlp2rdf.NIFLiteral;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.bean.NIFBean;
+import org.nlp2rdf.nif20.NIF20Format;
 
 public class NIF20Literal implements NIFLiteral, NIF20Format {
 

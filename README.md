@@ -33,7 +33,7 @@ NIFBean.NIFBeanBuilder contextBuilder = new NIFBean.NIFBeanBuilder();
 
 contextBuilder.context("http://freme-project.eu", 0, 33).mention("Diego Maradona is from Argentina.").nifType(NIFType.CONTEXT);
 
-NIFBean beanContext = new NIFBean(builderContext);
+NIFBean beanContext = new NIFBean(contextBuilder);
 
 ```
 

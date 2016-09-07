@@ -1,16 +1,8 @@
 package org.nlp2rdf;
 
 
-import org.aksw.rdfunit.enums.TestCaseExecutionType;
-import org.aksw.rdfunit.exceptions.TestCaseInstantiationException;
 import org.aksw.rdfunit.io.reader.RdfReaderException;
 import org.aksw.rdfunit.io.reader.RdfReaderFactory;
-import org.aksw.rdfunit.model.impl.results.DatasetOverviewResults;
-import org.aksw.rdfunit.model.interfaces.results.TestCaseResult;
-import org.aksw.rdfunit.model.interfaces.results.TestExecution;
-import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator;
-import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
-import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.junit.Test;
 import org.nlp2rdf.bean.NIFBean;
@@ -19,9 +11,6 @@ import org.nlp2rdf.nif20.impl.NIF20;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 
 public class NIF20Test {
@@ -113,8 +102,8 @@ public class NIF20Test {
         System.out.println(nif20.getTurtle());
     }
 
-    @Test
-    public void testIsomorphicRdfResults() throws RdfReaderException {
+    /*  @Test
+  public void testIsomorphicRdfResults() throws RdfReaderException {
         //Init
         List<NIFBean> beans = getBean();
 
@@ -124,11 +113,11 @@ public class NIF20Test {
 
         //Assert
         RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
-    }
+    }*/
 
 
-    @Test
-    public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
+  /*    @Test
+  public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
 
@@ -144,10 +133,10 @@ public class NIF20Test {
         //Assert
         assertTrue(modelNt.isIsomorphicWith(modelTtl));
 
-    }
+    }*/
 
 
-    @Test
+    /*  @Test
     public void testIfNTisIsomorphicWithXml() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
@@ -163,10 +152,10 @@ public class NIF20Test {
         //Assert
         assertTrue(modelNt.isIsomorphicWith(modelXml));
 
-    }
+    }*/
 
 
-    @Test
+    /*@Test
     public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
@@ -189,7 +178,7 @@ public class NIF20Test {
             fail(tcr.getMessage());
         }
 
-    }
+    }*/
 
     @Test
     public void testGenerateJSONLD() {

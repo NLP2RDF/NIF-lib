@@ -1,13 +1,13 @@
 package org.nlp2rdf.nif20.impl;
 
-import org.apache.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Model;
 import org.nlp2rdf.ContextJSONLD;
 import org.nlp2rdf.NIF;
-import org.nlp2rdf.bean.NIFBean;
-import org.nlp2rdf.nif20.NIF20Format;
 import org.nlp2rdf.NIFFormat;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.formats.Conversor;
+import org.nlp2rdf.nif20.NIF20Format;
 import org.nlp2rdf.validator.NIFMessagesException;
 
 import java.util.List;

@@ -1,10 +1,10 @@
 package org.nlp2rdf.nif20.impl;
 
-import org.apache.jena.rdf.model.Model;
-import org.nlp2rdf.bean.NIFContext;
-import org.nlp2rdf.nif20.NIF20Format;
+import com.hp.hpl.jena.rdf.model.Model;
 import org.nlp2rdf.NIFResource;
 import org.nlp2rdf.NIFVisitor;
+import org.nlp2rdf.bean.NIFContext;
+import org.nlp2rdf.nif20.NIF20Format;
 
 public class NIF20Resource implements NIFResource, NIF20Format {
 
