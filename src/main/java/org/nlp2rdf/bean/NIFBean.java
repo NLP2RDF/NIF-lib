@@ -168,10 +168,14 @@ public class NIFBean implements NIFMessagesException {
 
     public void setTypes(List<String> types) {
         List<String> convertedTypes = new ArrayList<>();
-        types.stream().forEach( type -> {
-            convertedTypes.add(entityTypes.getOrDefault(type, type));
-        });
-        this.types = types;
+        if (types != null) {
+            types.stream().forEach(type -> {
+                if (type != null) {
+                    convertedTypes.add(entityTypes.getOrDefault(type, type));
+                }
+            });
+        }
+        this.types = convertedTypes;
     }
 
     public NIFContext getContext() {
