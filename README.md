@@ -4,7 +4,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0434cdca38e74a2f8ba271496d3de2eb)](https://www.codacy.com/app/sandroacoelho/NIF-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NLP2RDF/NIF-lib&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/d2f8dbc4-6853-4bc4-9933-6e6830a76a7b)](https://codebeat.co/projects/github-com-nlp2rdf-nif-lib)
 
-[![Project Stats](https://www.openhub.net/p/RDFUnit/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/RDFUnit)
+[![Project Stats](https://www.openhub.net/p/NIF-lib/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/NIF-lib)
 
 ## What is NIF (NLP Interchange Format) ?
 
