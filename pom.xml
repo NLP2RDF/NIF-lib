@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.nlp2rdf</groupId>
-    <artifactId>NIF</artifactId>
+    <artifactId>nif</artifactId>
     <packaging>jar</packaging>
     <version>0.3</version>
     <name>NIF library</name>
@@ -45,7 +45,6 @@
         <junit.version>4.12</junit.version>
         <rdfunit.version>0.8</rdfunit.version>
         <velocity.version>1.7</velocity.version>
-        <aksw.keyname>AKSW.GPG</aksw.keyname>
     </properties>
 
     <dependencies>
@@ -104,49 +103,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <!--<configuration>
-                                    <keyname>AKSW</keyname>
-                                    <passphraseServerId>${aksw.keyname}</passphraseServerId>
-                                </configuration>
-                                 -->
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <version>2.5.2</version>
-                        <configuration>
-                            <goals>deploy</goals>
-                            <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <useReleaseProfile>false</useReleaseProfile>
-                            <releaseProfiles>release</releaseProfiles>
-                            <tagNameFormat>v@{project.version}</tagNameFormat>
-                            <scmCommentPrefix>[maven-release-plugin] [ci build-cli] [ci build-webdemo] -
-                            </scmCommentPrefix>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
             <plugin>
@@ -166,6 +122,51 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <!--<configuration>
+                            <keyname>AKSW</keyname>
+                            <passphraseServerId>${aksw.keyname}</passphraseServerId>
+                        </configuration>
+                         -->
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
