@@ -1,8 +1,10 @@
 ## NIF library
 [![maven-central](https://img.shields.io/badge/maven--central-0.3-blue.svg)](http://search.maven.org/#artifactdetails%7Corg.nlp2rdf%7Cnif%7C0.3%7Cjar)
-[![RDFUnit](https://img.shields.io/badge/RDFUnit-compliance-brightgreen.svg)](https://github.com/AKSW/RDFUnit) [![Build Status](https://travis-ci.org/sandroacoelho/NIF-lib.svg?branch=master)](https://travis-ci.org/sandroacoelho/NIF-lib) [![Coverage Status](https://coveralls.io/repos/github/sandroacoelho/NIF-lib/badge.svg?branch=master)](https://coveralls.io/github/sandroacoelho/NIF-lib?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/eef8ff92daa34394ab90fea368a2d639)](https://www.codacy.com/app/sandroacoelho/NIF-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sandroacoelho/NIF-lib&amp;utm_campaign=Badge_Grade)
-[![codebeat badge](https://codebeat.co/badges/09126edf-2462-436b-8045-78de67d01ef2)](https://codebeat.co/projects/github-com-sandroacoelho-nif-lib)
+[![RDFUnit](https://img.shields.io/badge/RDFUnit-compliance-brightgreen.svg)](https://github.com/AKSW/RDFUnit) [![Build Status](https://travis-ci.org/NLP2RDF/NIF-lib.svg?branch=master)](https://travis-ci.org/NLP2RDF/NIF-lib) [![Coverage Status](https://coveralls.io/repos/github/NLP2RDF/NIF-lib/badge.svg)](https://coveralls.io/github/NLP2RDF/NIF-lib)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0434cdca38e74a2f8ba271496d3de2eb)](https://www.codacy.com/app/sandroacoelho/NIF-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NLP2RDF/NIF-lib&amp;utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/d2f8dbc4-6853-4bc4-9933-6e6830a76a7b)](https://codebeat.co/projects/github-com-nlp2rdf-nif-lib)
+
+[![Project Stats](https://www.openhub.net/p/RDFUnit/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/RDFUnit)
 
 ## What is NIF (NLP Interchange Format) ?
 
