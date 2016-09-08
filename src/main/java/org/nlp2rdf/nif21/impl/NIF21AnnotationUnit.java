@@ -22,22 +22,28 @@ public class NIF21AnnotationUnit implements NIFAnnotationUnit, NIF21Format {
         if (model != null && entity != null && entity.isMention()) {
             Resource contextRes = model.getResource(entity.getContext().getNIF21());
 
-            Resource unitRes = model.createResource().addProperty(RDF.type, ResourceFactory.createResource(NIF_PROPERTY_ENTITY_OCCURRENCE));
+            Resource unitRes = model.createResource().addProperty(RDF.type,
+                    ResourceFactory.createResource(NIF_PROPERTY_ENTITY_OCCURRENCE));
 
-            unitRes.addProperty(model.createProperty(RDF_PROPERTY_IDENTREF), model.createResource(entity.getTaIdentRef()));
+            unitRes.addProperty(model.createProperty(RDF_PROPERTY_IDENTREF),
+                    model.createResource(entity.getTaIdentRef()));
 
             if (entity.hasTypes()) {
-                for (String ref : entity.getTypes()) {
-                    unitRes.addProperty(
-                            model.createProperty(RDF_PROPERTY_CLASS_REF),
-                            model.createResource(ref));
-                }
+
+                entity.getTypes().stream().forEach(type -> unitRes.addProperty(
+                        model.createProperty(RDF_PROPERTY_CLASS_REF),
+                        model.createResource(type)));
 
             }
+
             if (entity.getScore() != null) {
-                unitRes.addProperty(model.createProperty(RDF_PROPERTY_CONFIDENCE), model.createTypedLiteral(entity.getScore()));
+
+                unitRes.addProperty(model.createProperty(RDF_PROPERTY_CONFIDENCE),
+                        model.createTypedLiteral(entity.getScore()));
+
             }
-            unitRes.addProperty(model.createProperty(RDF_PROPERTY_ANNOTATOR), model.createProperty(entity.getAnnotator()));
+            unitRes.addProperty(model.createProperty(RDF_PROPERTY_ANNOTATOR),
+                    model.createProperty(entity.getAnnotator()));
 
             contextRes.addProperty(model.createProperty(NIF_PROPERTY_ANNOTATION_UNIT), unitRes);
 

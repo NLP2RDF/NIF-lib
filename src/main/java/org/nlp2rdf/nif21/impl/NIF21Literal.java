@@ -33,7 +33,7 @@ public class NIF21Literal implements NIFLiteral, NIF21Format {
             } else if (entity.isMention()) {
 
                 contextRes.addLiteral(
-                        model.createProperty(NIF_PROPERTY_ISSTRING),
+                        model.createProperty(NIF_PROPERTY_ANCHOROF),
                         entity.getMention());
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_BEGININDEX),

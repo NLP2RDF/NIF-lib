@@ -16,11 +16,11 @@ public interface NIF21Format extends NIFFormat {
 
     String RDF_PROPERTY_ANNOTATOR = RDF_PREFIX.concat("taAnnotatorsRef");
 
-    String NIF_21 = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core/2.1";
+    String NIF_21 = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/2.1";
 
     String NIF_PROPERTY_CONFORMS_TO = "http://purl.org/dc/terms/conformsTo";
 
-    String NIF_CORE_PREFIX = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core#";
+    String NIF_CORE_PREFIX = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#";
 
     String NIF_PROPERTY_ISSTRING = NIF_CORE_PREFIX.concat("isString");
 
@@ -29,6 +29,8 @@ public interface NIF21Format extends NIFFormat {
     String NIF_PROPERTY_CONTEXT = NIF_CORE_PREFIX.concat("Context");
 
     String NIF_PROPERTY_PHRASE = NIF_CORE_PREFIX.concat("Phrase");
+
+    String NIF_PROPERTY_ANCHOROF = NIF_CORE_PREFIX.concat("anchorOf");
 
     String NIF_PROPERTY_BEGININDEX = NIF_CORE_PREFIX.concat("beginIndex");
 

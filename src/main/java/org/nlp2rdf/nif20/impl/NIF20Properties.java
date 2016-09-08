@@ -17,11 +17,13 @@ public class NIF20Properties implements NIFProperties, NIF20Format {
             Resource contextRes = model.getResource(entity.getContext().getNIF20());
 
             if (entity.isMention()) {
+
                 fillMention(model, entity, contextRes);
 
             } else if (entity.isContext()) {
 
                 fillContext(model, contextRes);
+
             }
         }
     }
@@ -44,11 +46,9 @@ public class NIF20Properties implements NIFProperties, NIF20Format {
 
         contextRes.addProperty(
                 RDF.type,
-                model.createResource(NIF_PROPERTY_WORD));
+                model.createResource(NIF_PROPERTY_STRING));
 
-        contextRes.addProperty(
-                RDF.type,
-                model.createResource(NIF_PROPERTY_PHRASE));
+
         contextRes.addProperty(
                 model.createProperty(NIF_PROPERTY_REFERENCE_CONTEXT),
                 model.createResource(entity.getReferenceContext()));
@@ -59,6 +59,7 @@ public class NIF20Properties implements NIFProperties, NIF20Format {
                     model.createResource(entity.getTaIdentRef()));
         }
 
+
         if (entity.hasTypes()) {
             for (String type : entity.getTypes()) {
                 contextRes.addProperty(
@@ -66,9 +67,14 @@ public class NIF20Properties implements NIFProperties, NIF20Format {
                         model.createResource(type));
             }
         }
+
         contextRes.addProperty(
                 RDF.type,
-                model.createResource(NIF_PROPERTY_STRING));
+                model.createResource(NIF_PROPERTY_WORD));
+
+        contextRes.addProperty(
+                RDF.type,
+                model.createResource(NIF_PROPERTY_PHRASE));
 
         contextRes.addProperty(
                 RDF.type,

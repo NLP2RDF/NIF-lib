@@ -1,6 +1,5 @@
 package org.nlp2rdf.nif20.impl;
 
-;
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;

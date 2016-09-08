@@ -1,9 +1,6 @@
 package org.nlp2rdf;
 
 
-import org.aksw.rdfunit.io.reader.RdfReaderException;
-import org.aksw.rdfunit.io.reader.RdfReaderFactory;
-import org.apache.jena.riot.Lang;
 import org.junit.Test;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFType;

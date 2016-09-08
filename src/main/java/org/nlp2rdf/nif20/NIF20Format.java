@@ -12,7 +12,7 @@ public interface NIF20Format {
 
     String RDF_PROPERTY_IDENTREF = RDF_PREFIX.concat("taIdentRef");
 
-    String NIF_CORE_PREFIX = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core#";
+    String NIF_CORE_PREFIX = "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#";
 
     String NIF_PROPERTY_ISSTRING = NIF_CORE_PREFIX.concat("isString");
 
