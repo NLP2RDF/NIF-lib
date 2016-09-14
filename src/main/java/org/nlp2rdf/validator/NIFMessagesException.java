@@ -38,5 +38,7 @@ public interface NIFMessagesException {
 
     String NIF_STRUCTURE_DUPLICATED_CONTEXT = "NIF 2001 - Duplicated context. You must provide only one NIF Context";
 
+    String NIF_BEANS_NOT_FOUND = "NIF 3000 - You must provide almost one NIF bean to convert to json";
+
 
 }

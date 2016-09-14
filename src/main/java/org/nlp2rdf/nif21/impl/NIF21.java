@@ -10,6 +10,10 @@ import org.nlp2rdf.formats.Conversor;
 import org.nlp2rdf.nif21.NIF21Format;
 
 import java.util.List;
+import java.util.Objects;
+
+import static org.nlp2rdf.validator.NIFMessagesException.NIF_DATA_CONTEXT;
+import static org.nlp2rdf.validator.NIFMessagesException.NIF_DATA_VALUE_NOT_NULL;
 
 
 public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD {
@@ -63,6 +67,8 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
     }
 
     public String getJSONLD(String context) {
+
+        Objects.requireNonNull(context, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_CONTEXT));
 
         super.getNTriples(getModel()); //Just to check if the model has no errors
 

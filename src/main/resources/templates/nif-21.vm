@@ -1,5 +1,10 @@
 {
     "@context": "$contextJSON",
+     "referenceContext": [
+          "@type": ["ContextCollection"] ,
+          "hasContext":"$context",
+          "http://purl.org/dc/terms/conformsTo" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core/2.1"
+    ],
     "graph": [
 	        #foreach( $bean in $beans)
 	        {
@@ -13,8 +18,7 @@
                                ],
             "nif:isString" : "$bean.mention",
             "beginIndex": "$bean.beginIndex",
-            "endIndex": "$bean.endIndex",
-            "referenceContext": "$bean.referenceContext",
+            "endIndex": "$bean.endIndex"
     	    }#if( $foreach.hasNext ),
            #end
           #end
