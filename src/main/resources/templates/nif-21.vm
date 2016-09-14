@@ -3,7 +3,7 @@
     "graph": [
 	        #foreach( $bean in $beans)
 	        {
-    		"@id":  "$bean.context.NIF21",
+    		"@id":  "$bean.context.NIF21id",
     		"@type": [ "String", "Word", "Phrase", "OffsetBasedString"],
     		"annotationUnit" : [
                                 "taAnnotatorsRef" : "$bean.annotator",

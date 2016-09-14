@@ -64,7 +64,7 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
 
     public String getJSONLD(String context) {
 
-        super.getNTriples(getModel());
+        super.getNTriples(getModel()); //Just to check if the model has no errors
 
         return super.getJSONLD(context, beans, TEMPLATE_NIF_PATH);
     }
