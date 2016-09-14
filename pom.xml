@@ -45,6 +45,7 @@
         <junit.version>4.12</junit.version>
         <rdfunit.version>0.8</rdfunit.version>
         <velocity.version>1.7</velocity.version>
+        <guava.version>19.0</guava.version>
     </properties>
 
     <dependencies>
@@ -92,6 +93,13 @@
             <artifactId>velocity</artifactId>
             <version>${velocity.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
 
     </dependencies>
 
