@@ -12,10 +12,13 @@ import org.apache.velocity.context.Context;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFJSONLDContext;
 import org.nlp2rdf.bean.NIFType;
+import org.nlp2rdf.exception.NIFException;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
+
+import static org.nlp2rdf.validator.NIFMessagesException.NIF_BEANS_NOT_FOUND;
 
 public class Conversor {
 
@@ -74,7 +77,12 @@ public class Conversor {
 
         removeNIFContext(beans);
 
+        if (beans.size() == 0) {
+            throw new NIFException(NIF_BEANS_NOT_FOUND);
+        }
+
         context.put("contextJSON", contextJSON);
+        context.put("context", beans.get(0).getReferenceContext());
         context.put("beans", beans);
 
         String result = getStringFromVelocity(template, context);
