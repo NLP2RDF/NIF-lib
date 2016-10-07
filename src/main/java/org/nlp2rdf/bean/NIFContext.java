@@ -19,7 +19,16 @@ public class NIFContext {
         this.endIndex = endIndex;
     }
 
+    public NIFContext(String baseURI) {
+        this.baseURI = baseURI;
+    }
+
     public String context(String format) {
+
+        if (beginIndex == 0 && endIndex == 0) {
+            return baseURI;
+        }
+
         return String.format(format, baseURI, beginIndex, endIndex);
     }
 
