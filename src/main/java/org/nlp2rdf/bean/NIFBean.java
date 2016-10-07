@@ -248,6 +248,13 @@ public class NIFBean implements NIFMessagesException {
             return this;
         }
 
+        public NIFBeanBuilder context(String baseURI) {
+            Objects.requireNonNull(baseURI, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_BASE_URI));
+
+            this.context = new NIFContext(baseURI);
+            return this;
+        }
+
         public NIFBeanBuilder taIdentRef(String taIdentRef) {
             Objects.requireNonNull(taIdentRef, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_TA_REFERENCE));
             this.taIdentRef = taIdentRef;

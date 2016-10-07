@@ -1,15 +1,15 @@
 {
     "@context": "$contextJSON",
-     "referenceContext": [
+     "referenceContext": {
           "@type": ["ContextCollection"] ,
           "hasContext":"$context",
           "http://purl.org/dc/terms/conformsTo" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core/2.1"
-    ],
+    },
     "graph": [
 	        #foreach( $bean in $beans)
 	        {
     		"@id":  "$bean.context.NIF21id",
-    		"@type": [ "String", "Word", "Phrase", "OffsetBasedString"],
+    		"@type": { "String", "Word", "Phrase", "OffsetBasedString"],
     		"annotationUnit" : [
                                 "taAnnotatorsRef" : "$bean.annotator",
                                 "taClassRef": ["$bean.types"],
