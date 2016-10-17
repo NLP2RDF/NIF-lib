@@ -22,24 +22,27 @@ public class NIF20Literal implements NIFLiteral, NIF20Format {
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_ISSTRING),
                         entity.getMention(), XSDDatatype.XSDstring);
 
-                contextRes.addLiteral(
-                        model.createProperty(NIF_PROPERTY_BEGININDEX),
-                        model.createTypedLiteral(entity.getContext().getBeginIndex()));
-                contextRes.addLiteral(
-                        model.createProperty(NIF_PROPERTY_ENDINDEX),
-                        model.createTypedLiteral(entity.getContext().getEndIndex()));
+                model.add(contextRes, model.createProperty(NIF_PROPERTY_BEGININDEX),
+                        entity.getContext().getBeginIndex().toString(),
+                        XSDDatatype.XSDnonNegativeInteger);
+
+                model.add(contextRes, model.createProperty(NIF_PROPERTY_ENDINDEX),
+                        entity.getContext().getBeginIndex().toString(),
+                        XSDDatatype.XSDnonNegativeInteger);
 
             } else if (entity.isMention()) {
 
                 contextRes.addLiteral(
                         model.createProperty(NIF_PROPERTY_ANCHOR_OF),
                         entity.getMention());
-                contextRes.addLiteral(
-                        model.createProperty(NIF_PROPERTY_BEGININDEX),
-                        model.createTypedLiteral(entity.getBeginIndex()));
-                contextRes.addLiteral(
-                        model.createProperty(NIF_PROPERTY_ENDINDEX),
-                        model.createTypedLiteral(entity.getEndIndex()));
+
+                model.add(contextRes, model.createProperty(NIF_PROPERTY_BEGININDEX),
+                        entity.getContext().getBeginIndex().toString(),
+                        XSDDatatype.XSDnonNegativeInteger);
+
+                model.add(contextRes, model.createProperty(NIF_PROPERTY_ENDINDEX),
+                        entity.getContext().getBeginIndex().toString(),
+                        XSDDatatype.XSDnonNegativeInteger);
 
                 if (entity.hasTypes()) {
                     for (String ref : entity.getTypes()) {
