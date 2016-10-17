@@ -29,6 +29,11 @@ public class NIFContext {
             return baseURI;
         }
 
+        if (baseURI != null && !baseURI.isEmpty() &&
+                !"/".equals(baseURI.substring(baseURI.length() - 1))) {
+            baseURI = baseURI.concat("/");
+        }
+
         return String.format(format, baseURI, beginIndex, endIndex);
     }
 
