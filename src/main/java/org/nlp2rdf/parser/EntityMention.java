@@ -1,8 +1,7 @@
 package org.nlp2rdf.parser;
 
-/**
- *
- * @author Milan Dojchinovski <milan.dojchinovski@fit.cvut.cz>
+/*
+ * Milan Dojchinovski <milan.dojchinovski@fit.cvut.cz>
  * http://dojchinovski.mk
  */
 public class EntityMention {

@@ -86,12 +86,8 @@ public class NIFParser {
     }
 
 
-    /**
-     * Create a Document containing the raw context and list of EntityMentions from a NIF document.
-     *
-     * @author Milan Dojchinovski <milan.dojchinovski@fit.cvut.cz>, Nilesh Chakraborty <nilesh@nileshc.com>
-     * http://dojchinovski.mk
-     */
+    // authors: Milan Dojchinovski milan.dojchinovski@fit.cvut.cz, Nilesh Chakraborty nilesh@nileshc.com
+    // http://dojchinovski.mk
     public static Document getDocumentFromNIFString(String nifString) {
         ArrayList<EntityMention> list = new ArrayList<>();
         Model model = ModelFactory.createDefaultModel();
