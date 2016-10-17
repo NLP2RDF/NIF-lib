@@ -8,6 +8,7 @@ import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.formats.Conversor;
 import org.nlp2rdf.nif21.NIF21Format;
+import org.nlp2rdf.parser.NIFParser;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,12 +23,19 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
 
     private List<NIFBean> beans;
 
+    private NIFParser parser;
+
     public NIF21() {
     }
 
     public NIF21(List<NIFBean> beans) {
         this.elements = new NIFFormat[]{new NIF21Resource(), new NIF21Prefixes(), new NIF21Properties(), new NIF21Literal(), new NIF21AnnotationUnit()};
         this.beans = beans;
+    }
+
+    public NIF21(List<NIFBean> beans, NIFParser parser) {
+        this(beans);
+        this.parser = parser;
     }
 
     public Model getModel() {
@@ -50,6 +58,12 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
             nif21Context.setBean(beans.get(i));
             accept(nifVisitor);
         }
+
+
+        if (parser != null) {
+            return parser.merge(nifVisitor.getModel());
+        }
+
         return nifVisitor.getModel();
 
     }
