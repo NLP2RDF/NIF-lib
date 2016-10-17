@@ -34,7 +34,7 @@ public interface NIF20Format {
 
     String NIF_PROPERTY_REFERENCE_CONTEXT = NIF_CORE_PREFIX.concat("referenceContext");
 
-    String CONTEXT_FORMAT = "%s#char=%d,%d";
+    String CONTEXT_FORMAT = "%s/#char=%d,%d";
 
     String TEMPLATE_NIF_PATH = "./src/main/resources/templates/nif-20.vm";
 

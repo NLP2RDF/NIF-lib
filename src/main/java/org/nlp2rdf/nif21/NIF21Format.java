@@ -46,7 +46,7 @@ public interface NIF21Format extends NIFFormat {
 
     String NIF_PROPERTY_HAS_CONTEXT = NIF_CORE_PREFIX.concat("hasContext");
 
-    String CONTEXT_FORMAT = "%s#offset_%d_%d";
+    String CONTEXT_FORMAT = "%s/#offset_%d_%d";
 
     String TEMPLATE_NIF_PATH = "./src/main/resources/templates/nif-21.vm";
 
