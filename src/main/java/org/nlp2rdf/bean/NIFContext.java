@@ -17,21 +17,27 @@ public class NIFContext {
         this.baseURI = baseURI;
         this.beginIndex = beginIndex;
         this.endIndex = endIndex;
+        formatBaseURI();
     }
 
     public NIFContext(String baseURI) {
         this.baseURI = baseURI;
+        formatBaseURI();
+    }
+
+    private void formatBaseURI() {
+        if (baseURI != null && !baseURI.isEmpty() &&
+                !"/".equals(baseURI.substring(baseURI.length() - 1))) {
+            baseURI = baseURI.concat("/");
+        }
     }
 
     public String context(String format) {
 
+        formatBaseURI();
+
         if (beginIndex == 0 && endIndex == 0) {
             return baseURI;
-        }
-
-        if (baseURI != null && !baseURI.isEmpty() &&
-                !"/".equals(baseURI.substring(baseURI.length() - 1))) {
-            baseURI = baseURI.concat("/");
         }
 
         return String.format(format, baseURI, beginIndex, endIndex);
