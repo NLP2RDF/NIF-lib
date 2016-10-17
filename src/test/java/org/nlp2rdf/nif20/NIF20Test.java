@@ -1,16 +1,17 @@
-package org.nlp2rdf;
+package org.nlp2rdf.nif20;
 
 
 import org.junit.Test;
+import org.nlp2rdf.NIF;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFType;
-import org.nlp2rdf.nif21.impl.NIF21;
+import org.nlp2rdf.nif20.impl.NIF20;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NIF21Test {
+public class NIF20Test {
 
     private List<NIFBean> getBean() {
 
@@ -75,7 +76,7 @@ public class NIF21Test {
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans, null);
         System.out.println(nif20.getNTriples());
     }
 
@@ -85,7 +86,7 @@ public class NIF21Test {
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans, null);
         System.out.println(nif20.getRDFxml());
     }
 
@@ -95,17 +96,17 @@ public class NIF21Test {
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans, null);
         System.out.println(nif20.getTurtle());
     }
 
-  /*   @Test
-   public void testIsomorphicRdfResults() throws RdfReaderException {
+    /*  @Test
+  public void testIsomorphicRdfResults() throws RdfReaderException {
         //Init
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans);
         String turtle = nif20.getTurtle();
 
         //Assert
@@ -113,13 +114,13 @@ public class NIF21Test {
     }*/
 
 
-   /* @Test
-    public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
+  /*    @Test
+  public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans);
         String turtle = nif20.getTurtle();
 
         Model modelTtl = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
@@ -133,13 +134,13 @@ public class NIF21Test {
     }*/
 
 
-    /*@Test
+    /*  @Test
     public void testIfNTisIsomorphicWithXml() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans);
         String rdfXml = nif20.getRDFxml();
         Model modelXml = RdfReaderFactory.createReaderFromText(rdfXml, Lang.RDFXML.getName()).read();
 
@@ -152,14 +153,13 @@ public class NIF21Test {
     }*/
 
 
-   /* @Test
+    /*@Test
     public void testDynamicRDFUnitTestsLookingForErrors() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
 
-
         //Act
-        NIF nif20 = new NIF21(beans);
+        NIF nif20 = new NIF20(beans);
         String turtle = nif20.getNTriples();
 
 
@@ -178,29 +178,14 @@ public class NIF21Test {
 
     }*/
 
-     /* @Test
+    @Test
     public void testGenerateJSONLD() {
         //Init
         List<NIFBean> beans = getBean();
 
         //Act
-        NIF nif21 = new NIF21(beans);
-        System.out.println(nif21.getJSONLD("http://www.freme-project.eu/context.jsonld"));
-
-    }*/
-
-    @Test
-    public void testGenerateJSONLDContext() {
-
-        //Init
-        ContextJSONLD context = new NIF21();
-        List<String>  ontologies = new ArrayList<>();
-
-        ontologies.add("http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#");
-
-        //Act
-
-        System.out.println(context.getContextForJSONLD(ontologies));
+        NIF nif20 = new NIF20(beans, null);
+        System.out.println(nif20.getJSONLD("http://www.freme-project.eu/context.jsonld"));
 
     }
 

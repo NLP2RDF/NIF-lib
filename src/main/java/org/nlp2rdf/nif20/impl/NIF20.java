@@ -8,6 +8,7 @@ import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.formats.Conversor;
 import org.nlp2rdf.nif20.NIF20Format;
+import org.nlp2rdf.parser.NIFParser;
 import org.nlp2rdf.validator.NIFMessagesException;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
 
     private List<NIFBean> beans;
 
+    private NIFParser parser;
+
     public NIF20() {
     }
 
@@ -27,6 +30,11 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
         Objects.requireNonNull(beans, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_BEANS));
         this.beans = beans;
         this.elements = new NIFFormat[]{new NIF20Resource(), new NIF20Prefixes(), new NIF20Properties(), new NIF20Literal()};
+    }
+
+    public NIF20(List<NIFBean> beans, NIFParser parser) {
+        this(beans);
+        this.parser = parser;
     }
 
     public void accept(NIFVisitor visitor) {
@@ -54,6 +62,10 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
         for (int i = 1; i < beans.size(); i++) {
             nif20Context.setBean(beans.get(i));
             accept(nifVisitor);
+        }
+
+        if (parser != null) {
+            return parser.merge(nifVisitor.getModel());
         }
 
         return nifVisitor.getModel();

@@ -1,0 +1,97 @@
+@prefix cc:    <http://creativecommons.org/ns#> .
+@prefix :      <https://term.tilde.com/terms/> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix its:   <http://www.w3.org/2005/11/its> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nif:   <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix tbx:   <http://tbx2rdf.lider-project.eu/tbx#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix ldr:   <http://purl.oclc.org/NET/ldr/ns#> .
+@prefix odrl:  <http://www.w3.org/ns/odrl/2/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+
+<http://freme-project.eu/#char=0,17>
+        a               nif:String , nif:RFC5147String , nif:Context ;
+        nif:beginIndex  "0"^^xsd:nonNegativeInteger ;
+        nif:endIndex    "17"^^xsd:nonNegativeInteger ;
+        nif:isString    "Welcome to Berlin" .
+
+:Berlin-en  a                  ontolex:LexicalEntry ;
+        ontolex:canonicalForm  <https://term.tilde.com/terms/Berlin-en#CanonicalForm> ;
+        ontolex:language       <http://www.lexvo.org/page/iso639-3/eng> ;
+        ontolex:sense          <https://term.tilde.com/terms/Berlin-en#Sense> .
+
+<https://term.tilde.com/terms/Berlin-de#CanonicalForm>
+        ontolex:writtenRep  "Berlin"@de .
+
+:de     a                 ontolex:Lexicon ;
+        ontolex:entry     <https://term.tilde.com/terms/das+Land+Berlin-de> , :Berlin-de ;
+        ontolex:language  <http://www.lexvo.org/page/iso639-3/ger/deu> .
+
+<https://term.tilde.com/terms/Berlin-en#Sense>
+        ontolex:reference  :828860 , :618766 , :345292 .
+
+<https://term.tilde.com/terms/das+Land+Berlin-de#Sense>
+        ontolex:reference  :828860 .
+
+:828860  a                skos:Concept ;
+        rdfs:comment      "international trade"@en , "European organisations"@en , "Community law"@en ;
+        tbx:subjectField  <https://term.tilde.com/domains/TaaS-0304> , <https://term.tilde.com/domains/TaaS-0107> , <https://term.tilde.com/domains/7611> , <https://term.tilde.com/domains/2021> , <https://term.tilde.com/domains/1011> .
+
+:618766  a                skos:Concept ;
+        rdfs:comment      "regions of EU Member States"@en , "information and information processing"@en ;
+        tbx:subjectField  <https://term.tilde.com/domains/TaaS-2105> , <https://term.tilde.com/domains/TaaS-2000> , <https://term.tilde.com/domains/7211> , <https://term.tilde.com/domains/3231> .
+
+:345292  a                skos:Concept ;
+        rdfs:comment      "POLITICS"@en , "SCIENCE"@en , "LAW"@en ;
+        tbx:subjectField  <https://term.tilde.com/domains/TaaS-0200> , <https://term.tilde.com/domains/TaaS-2100> , <https://term.tilde.com/domains/TaaS-0100> , <https://term.tilde.com/domains/12> , <https://term.tilde.com/domains/unknown> , <https://term.tilde.com/domains/36> .
+
+<https://term.tilde.com/terms/Berlin-de#Sense>
+        ontolex:reference  :618766 , :345292 .
+
+<https://term.tilde.com/terms/das+Land+Berlin-de#CanonicalForm>
+        ontolex:writtenRep  "das Land Berlin"@de .
+
+<https://term.tilde.com/terms/das+Land+Berlin-de>
+        a                      ontolex:LexicalEntry ;
+        ontolex:canonicalForm  <https://term.tilde.com/terms/das+Land+Berlin-de#CanonicalForm> ;
+        ontolex:language       <http://www.lexvo.org/page/iso639-3/ger/deu> ;
+        ontolex:sense          <https://term.tilde.com/terms/das+Land+Berlin-de#Sense> .
+
+:en     a                 ontolex:Lexicon ;
+        ontolex:entry     :Berlin-en ;
+        ontolex:language  <http://www.lexvo.org/page/iso639-3/eng> .
+
+:Berlin-de  a                  ontolex:LexicalEntry ;
+        ontolex:canonicalForm  <https://term.tilde.com/terms/Berlin-de#CanonicalForm> ;
+        ontolex:language       <http://www.lexvo.org/page/iso639-3/ger/deu> ;
+        ontolex:sense          <https://term.tilde.com/terms/Berlin-de#Sense> .
+
+<http://freme-project.eu/#char=11,17>
+        a                     nif:RFC5147String ;
+        nif:anchorOf          "Berlin"@en ;
+        nif:annotationUnit    [ rdfs:label           "Berlin"@en ;
+                                itsrdf:taConfidence  1
+                              ] ;
+        nif:beginIndex        "11"^^xsd:nonNegativeInteger ;
+        nif:endIndex          "17"^^xsd:nonNegativeInteger ;
+        nif:referenceContext  <http://freme-project.eu/#char=0,17> ;
+        itsrdf:term           "yes" ;
+        itsrdf:termInfoRef    :618766 , :828860 , <http://aims.fao.org/aos/agrovoc/c_8357> , :345292 .
+
+:       a                 dcat:Dataset , tbx:MartifHeader ;
+        <http://purl.org/dc/elements/1.1/source>
+                "" ;
+        dct:type          "TBX" ;
+        tbx:encodingDesc  "<p type=\"XCSURI\">http://www.ttt.org/oscarstandards/tbx/TBXXCS.xcs</p>"^^rdf:XMLLiteral ;
+        tbx:sourceDesc    "<sourceDesc><p/></sourceDesc>"^^rdf:XMLLiteral .
+
+<https://term.tilde.com/terms/Berlin-en#CanonicalForm>
+        ontolex:writtenRep  "Berlin"@en .
