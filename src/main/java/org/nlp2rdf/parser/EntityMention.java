@@ -57,16 +57,16 @@ public class EntityMention {
         return context;
     }
 
+    public void setContext(String context) {
+        this.context = context;
+    }
+
     public String getReferenceContext() {
         return referenceContext;
     }
 
     public void setReferenceContext(String referenceContext) {
         this.referenceContext = referenceContext;
-    }
-
-    public void setContext(String context) {
-        this.context = context;
     }
 
 

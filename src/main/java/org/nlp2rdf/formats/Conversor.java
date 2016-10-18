@@ -1,7 +1,6 @@
 package org.nlp2rdf.formats;
 
 
-
 import com.hp.hpl.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;

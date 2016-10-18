@@ -1,6 +1,5 @@
 package org.nlp2rdf.nif21.impl;
 
-
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -8,6 +7,8 @@ import org.nlp2rdf.NIFLiteral;
 import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.nif21.NIF21Format;
+
+import static org.nlp2rdf.model.ModelMergeManager.removeDuplicatedValues;
 
 public class NIF21Literal implements NIFLiteral, NIF21Format {
 
@@ -19,6 +20,10 @@ public class NIF21Literal implements NIFLiteral, NIF21Format {
             Resource contextRes = model.getResource(entity.getContext().getNIF21());
 
             if (entity.isContext()) {
+
+                removeDuplicatedValues(model, contextRes, NIF_PROPERTY_ISSTRING, entity.getMention());
+                removeDuplicatedValues(model, contextRes, NIF_PROPERTY_BEGININDEX, entity.getMention());
+                removeDuplicatedValues(model, contextRes, NIF_PROPERTY_ENDINDEX, entity.getMention());
 
                 contextRes.addLiteral(
                         model.getProperty(NIF_PROPERTY_ISSTRING),
