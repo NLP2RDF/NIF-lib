@@ -27,7 +27,7 @@ public class NIF20Literal implements NIFLiteral, NIF20Format {
                         XSDDatatype.XSDnonNegativeInteger);
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_ENDINDEX),
-                        entity.getContext().getBeginIndex().toString(),
+                        entity.getContext().getEndIndex().toString(),
                         XSDDatatype.XSDnonNegativeInteger);
 
             } else if (entity.isMention()) {
@@ -41,7 +41,7 @@ public class NIF20Literal implements NIFLiteral, NIF20Format {
                         XSDDatatype.XSDnonNegativeInteger);
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_ENDINDEX),
-                        entity.getContext().getBeginIndex().toString(),
+                        entity.getContext().getEndIndex().toString(),
                         XSDDatatype.XSDnonNegativeInteger);
 
                 if (entity.hasTypes()) {
