@@ -15,6 +15,38 @@ public class NIFParser {
         this.nif = nif;
     }
 
+    // authors: Milan Dojchinovski milan.dojchinovski@fit.cvut.cz, Nilesh Chakraborty nilesh@nileshc.com
+    // http://dojchinovski.mk
+    public static Document getDocumentFromNIFString(String nifString) {
+        ArrayList<EntityMention> list = new ArrayList<>();
+        Model model = ModelFactory.createDefaultModel();
+        model.read(new ByteArrayInputStream(nifString.getBytes()), null, "TTL");
+        StmtIterator iter = model.listStatements(null, RDF.type, model.getResource(NIF20Format.NIF_PROPERTY_PHRASE));
+        while (iter.hasNext()) {
+            Statement stm = iter.nextStatement();
+            Resource entityRes = stm.getSubject().asResource();
+            String mention = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_ANCHOR_OF)).getObject().asLiteral().getString();
+            String referenceContext = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_REFERENCE_CONTEXT)).getObject().toString();
+            int beginIndex = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_BEGININDEX)).getObject().asLiteral().getInt();
+            int endIndex = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_ENDINDEX)).getObject().asLiteral().getInt();
+            EntityMention em = new EntityMention();
+            em.setMention(mention);
+            em.setBeginIndex(beginIndex);
+            em.setEndIndex(endIndex);
+            em.setContext(stm.getSubject().getNameSpace());
+            em.setReferenceContext(referenceContext);
+
+            list.add(em);
+        }
+
+        iter = model.listStatements(null, RDF.type, model.getResource(NIF20Format.NIF_PROPERTY_CONTEXT));
+        Statement stm = iter.nextStatement();
+        Resource contextRes = stm.getSubject().asResource();
+        String text = contextRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_ISSTRING)).getObject().asLiteral().getString();
+
+        return new Document(list, text);
+    }
+
     private Model init() {
         Model model = ModelFactory.createDefaultModel();
         model.read(new ByteArrayInputStream(nif.getBytes()), null, "TTL");
@@ -49,7 +81,6 @@ public class NIFParser {
         return result;
     }
 
-
     private void mergePrefixes(Model model) {
 
         if (model != null) {
@@ -67,7 +98,6 @@ public class NIFParser {
         }
     }
 
-
     private void mergeStatements(Model model) {
 
         if (model != null) {
@@ -83,39 +113,6 @@ public class NIFParser {
         mergeStatements(model);
 
         return model;
-    }
-
-
-    // authors: Milan Dojchinovski milan.dojchinovski@fit.cvut.cz, Nilesh Chakraborty nilesh@nileshc.com
-    // http://dojchinovski.mk
-    public static Document getDocumentFromNIFString(String nifString) {
-        ArrayList<EntityMention> list = new ArrayList<>();
-        Model model = ModelFactory.createDefaultModel();
-        model.read(new ByteArrayInputStream(nifString.getBytes()), null, "TTL");
-        StmtIterator iter = model.listStatements(null, RDF.type, model.getResource(NIF20Format.NIF_PROPERTY_PHRASE));
-        while (iter.hasNext()) {
-            Statement stm = iter.nextStatement();
-            Resource entityRes = stm.getSubject().asResource();
-            String mention = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_ANCHOR_OF)).getObject().asLiteral().getString();
-            String referenceContext = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_REFERENCE_CONTEXT)).getObject().toString();
-            int beginIndex = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_BEGININDEX)).getObject().asLiteral().getInt();
-            int endIndex = entityRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_ENDINDEX)).getObject().asLiteral().getInt();
-            EntityMention em = new EntityMention();
-            em.setMention(mention);
-            em.setBeginIndex(beginIndex);
-            em.setEndIndex(endIndex);
-            em.setContext(stm.getSubject().getNameSpace());
-            em.setReferenceContext(referenceContext);
-
-            list.add(em);
-        }
-
-        iter = model.listStatements(null, RDF.type, model.getResource(NIF20Format.NIF_PROPERTY_CONTEXT));
-        Statement stm = iter.nextStatement();
-        Resource contextRes = stm.getSubject().asResource();
-        String text = contextRes.getProperty(model.getProperty(NIF20Format.NIF_PROPERTY_ISSTRING)).getObject().asLiteral().getString();
-
-        return new Document(list, text);
     }
 
 }

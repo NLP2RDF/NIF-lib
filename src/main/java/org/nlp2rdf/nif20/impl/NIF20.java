@@ -57,6 +57,10 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
         nif20Context.setModel(model.create());
         NIFVisitor nifVisitor = nif20Context;
 
+        if (parser != null) {
+            parser.merge(nifVisitor.getModel());
+        }
+
         accept(nifVisitor);
 
         for (int i = 1; i < beans.size(); i++) {
@@ -64,9 +68,6 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
             accept(nifVisitor);
         }
 
-        if (parser != null) {
-            return parser.merge(nifVisitor.getModel());
-        }
 
         return nifVisitor.getModel();
     }

@@ -1,12 +1,8 @@
 package org.nlp2rdf.parser;
 
 import org.junit.Test;
-import org.nlp2rdf.bean.NIFBean;
-import org.nlp2rdf.bean.NIFType;
 import org.nlp2rdf.io.ResourceLoader;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;

@@ -52,16 +52,15 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
         nif21Context.setModel(model.create());
         NIFVisitor nifVisitor = nif21Context;
 
+        if (parser != null) {
+            parser.merge(nifVisitor.getModel());
+        }
+
         accept(nifVisitor);
 
         for (int i = 1; i < beans.size(); i++) {
             nif21Context.setBean(beans.get(i));
             accept(nifVisitor);
-        }
-
-
-        if (parser != null) {
-            return parser.merge(nifVisitor.getModel());
         }
 
         return nifVisitor.getModel();

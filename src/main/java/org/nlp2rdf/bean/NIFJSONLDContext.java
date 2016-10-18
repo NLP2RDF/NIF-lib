@@ -10,7 +10,7 @@ import java.util.List;
 public class NIFJSONLDContext {
 
 
-    public List<NIFJSONLDContextBean> convertToBeans (List<String> ontologies) {
+    public List<NIFJSONLDContextBean> convertToBeans(List<String> ontologies) {
 
         OntModel model = ModelFactory.createOntologyModel();
 
@@ -21,33 +21,32 @@ public class NIFJSONLDContext {
         });
 
         model.listDatatypeProperties().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(),data.getURI(), data.getLabel("en"),data.getComment("en"));
+            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
             beans.add(bean);
         });
 
         model.listObjectProperties().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(),data.getURI(), data.getLabel("en"),data.getComment("en"));
+            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
             beans.add(bean);
         });
 
 
         model.listClasses().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(),data.getURI(), data.getLabel("en"),data.getComment("en"));
+            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
             beans.add(bean);
         });
 
 
         model.listIndividuals().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(),data.getURI(), data.getLabel("en"),data.getComment("en"));
+            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
             beans.add(bean);
         });
 
 
         model.listAnnotationProperties().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(),data.getURI(), data.getLabel("en"),data.getComment("en"));
+            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
             beans.add(bean);
         });
-
 
 
         return beans;
@@ -62,7 +61,7 @@ public class NIFJSONLDContext {
 
         private String comment;
 
-        public NIFJSONLDContextBean (String name, String uri, String label, String comment) {
+        public NIFJSONLDContextBean(String name, String uri, String label, String comment) {
             setName(name);
             setUri(uri);
             setLabel(label);

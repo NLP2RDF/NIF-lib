@@ -59,12 +59,15 @@ public class NIFContext {
         return context(NIF20Format.CONTEXT_FORMAT);
     }
 
+    public String getNIF20id() {
+        return Hashing.md5().hashBytes(getNIF20().getBytes()).toString();
+    }
+
     public String getNIF21() {
         return context(NIF21Format.CONTEXT_FORMAT);
     }
 
     public String getNIF21id() {
         return Hashing.md5().hashBytes(getNIF21().getBytes()).toString();
-
     }
 }
