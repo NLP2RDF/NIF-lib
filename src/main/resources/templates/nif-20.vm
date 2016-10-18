@@ -3,7 +3,7 @@
 	"graph": [
 	        #foreach( $bean in $beans)
 	        {
-            "@id":  "$bean.context.baseURI#char=$bean.context.NIF20",
+            "@id":  "$bean.context.NIF20id",
     		"@type": [ "$bean.types"],
     		"nif:anchorOf" : "$bean.mention",
     		"beginIndex": "$bean.beginIndex",
