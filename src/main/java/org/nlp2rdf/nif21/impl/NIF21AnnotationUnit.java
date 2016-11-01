@@ -36,6 +36,15 @@ public class NIF21AnnotationUnit implements NIFAnnotationUnit, NIF21Format {
 
             }
 
+            if (entity.hasTaClassRef()) {
+
+                entity.getTaClassRef().stream().forEach(type -> unitRes.addProperty(
+                        model.createProperty(NIF_CLASS_REF),
+                        model.createResource(type)));
+
+            }
+
+
             if (entity.getScore() != null) {
 
                 unitRes.addProperty(model.createProperty(RDF_PROPERTY_CONFIDENCE),
