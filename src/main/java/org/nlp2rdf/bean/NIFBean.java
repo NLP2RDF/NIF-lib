@@ -26,6 +26,8 @@ public class NIFBean implements NIFMessagesException {
 
     private String taIdentRef;
 
+    private List<String> taClassRef;
+
     private String referenceContext;
 
     private Map<String, String> entityTypes = new HashMap<String, String>(8);
@@ -35,6 +37,10 @@ public class NIFBean implements NIFMessagesException {
         List<NIFBean> nifBeans = new ArrayList<>();
 
         builders.forEach(builder -> nifBeans.add(new NIFBean(builder)));
+    }
+
+    public List<String> getTaClassRef() {
+        return taClassRef;
     }
 
     public NIFBean(NIFBeanBuilder builder) {
@@ -49,6 +55,7 @@ public class NIFBean implements NIFMessagesException {
         setTaIdentRef(builder.taIdentRef);
         setReferenceContext(builder.referenceContext);
         setAnnotator(builder.annotator);
+        setTaClassRef(builder.taClassRef);
     }
 
     public static void validate(List<NIFBean> beans) {
@@ -89,6 +96,10 @@ public class NIFBean implements NIFMessagesException {
 
     public Boolean hasTypes() {
         return types != null && !types.isEmpty();
+    }
+
+    public Boolean hasTaClassRef() {
+        return taClassRef != null && !taClassRef.isEmpty();
     }
 
     public Boolean hasTaIdentRef() {
@@ -195,6 +206,10 @@ public class NIFBean implements NIFMessagesException {
         this.annotator = annotator;
     }
 
+    public void setTaClassRef(List<String> taClassRef) {
+        this.taClassRef = taClassRef;
+    }
+
     public static class NIFBeanBuilder {
 
         private String mention;
@@ -217,6 +232,8 @@ public class NIFBean implements NIFMessagesException {
 
         private NIFContext context;
 
+        private List<String> taClassRef;
+
         public NIFBeanBuilder() {
             init();
         }
@@ -232,6 +249,7 @@ public class NIFBean implements NIFMessagesException {
             this.taIdentRef = null;
             this.context = null;
             this.annotator = null;
+            this.taClassRef = null;
             return this;
         }
 
@@ -293,6 +311,11 @@ public class NIFBean implements NIFMessagesException {
 
         public NIFBeanBuilder types(List<String> types) {
             this.types = types == null ? new ArrayList<>(1) : types;
+            return this;
+        }
+
+        public NIFBeanBuilder taClassRef(List<String> taClassRef) {
+            this.taClassRef = taClassRef;
             return this;
         }
 

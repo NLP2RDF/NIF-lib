@@ -5,18 +5,14 @@
           "hasContext":"$context",
           "http://purl.org/dc/terms/conformsTo" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core/2.1"
     },
-    "graph": [
-	        #foreach( $bean in $beans)
-	        {
+    "nif:annotationUnit" : [
+	        #foreach( $bean in $beans){
     		"@id":  "$bean.context.NIF21id",
-    		"@type": { "String", "Word", "Phrase", "OffsetBasedString"],
-    		"annotationUnit" : [
-                                "taAnnotatorsRef" : "$bean.annotator",
-                                "taClassRef": ["$bean.types"],
-                                "taConfidence": ["$bean.score"],
-    		                    "taIdentRef": "$bean.taIdentRef",
-                               ],
-            "nif:isString" : "$bean.mention",
+    		"@type": [ "String", "Word", "Phrase", "OffsetBasedString"],
+            "taAnnotatorsRef" : "$bean.annotator",
+            "taClassRef": ["$bean.types"],
+            "taConfidence": ["$bean.score"],
+            "taIdentRef": "$bean.taIdentRef",
             "beginIndex": "$bean.beginIndex",
             "endIndex": "$bean.endIndex"
     	    }#if( $foreach.hasNext ),

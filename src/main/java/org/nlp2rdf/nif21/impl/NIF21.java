@@ -98,4 +98,9 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
             elem.accept(visitor);
         }
     }
+
+    @Override
+    public String getTurtle(Model model) {
+        return super.getTurtle(getModel());
+    }
 }

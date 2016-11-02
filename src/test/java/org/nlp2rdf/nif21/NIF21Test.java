@@ -69,10 +69,13 @@ public class NIF21Test {
         typesMention2.add("http://dbpedia.org/ontology/SoccerManager");
         typesMention2.add("http://nerd.eurecom.fr/ontology#Person");
 
+        List<String> taClassRefTypes = new ArrayList<>();
+        taClassRefTypes.add("http://dbpedia.org/ontology/SoccerManager");
+
         builderMention2.context("http://freme-project.eu", 0, 14).mention("Diego Maradona").beginIndex(0).endIndex(14)
                 .taIdentRef("http://dbpedia.org/resource/Diego_Maradona").score(0.9869992701528016)
                 .annotator("http://freme-project.eu/tools/freme-ner")
-                .types(typesMention2);
+                .types(typesMention2).taClassRef(taClassRefTypes);
 
         NIFBean bean1 = new NIFBean(builderMention2);
 

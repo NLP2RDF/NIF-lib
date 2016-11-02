@@ -24,6 +24,8 @@ public interface NIF21Format extends NIFFormat {
 
     String NIF_PROPERTY_ISSTRING = NIF_CORE_PREFIX.concat("isString");
 
+    String NIF_CLASS_REF = NIF_CORE_PREFIX.concat("taMsClassRef");
+
     String NIF_PROPERTY_OFFSETBASEDSTRING = NIF_CORE_PREFIX.concat("OffsetBasedString");
 
     String NIF_PROPERTY_CONTEXT = NIF_CORE_PREFIX.concat("Context");

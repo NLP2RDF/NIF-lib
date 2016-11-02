@@ -84,6 +84,11 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
         return super.getTurtle(getModel());
     }
 
+    @Override
+    public String getTurtle(Model model) {
+        return super.getTurtle(getModel());
+    }
+
     public String getJSONLD(String context) {
 
         super.getNTriples(getModel());
