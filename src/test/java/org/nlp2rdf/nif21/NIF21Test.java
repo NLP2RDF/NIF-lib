@@ -18,7 +18,9 @@ import org.nlp2rdf.bean.NIFType;
 import org.nlp2rdf.nif21.impl.NIF21;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -211,12 +213,11 @@ public class NIF21Test {
 
         //Init
         ContextJSONLD context = new NIF21();
-        List<String> ontologies = new ArrayList<>();
+        Set<String> ontologies = new HashSet<>();
 
         ontologies.add("http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#");
 
         //Act
-
         System.out.println(context.getContextForJSONLD(ontologies));
 
     }

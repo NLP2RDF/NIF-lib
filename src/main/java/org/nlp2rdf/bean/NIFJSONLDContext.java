@@ -1,58 +1,90 @@
 package org.nlp2rdf.bean;
 
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.ModelFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class NIFJSONLDContext {
 
 
-    public List<NIFJSONLDContextBean> convertToBeans(List<String> ontologies) {
+    private final String PREDICATE_RANGE = "http://www.w3.org/2000/01/rdf-schema#range";
+
+    private boolean isNotBlank(String data) {
+        return data != null && !data.isEmpty();
+    }
+
+
+    private Map<String, String> types;
+
+    private Set<String> properties;
+
+    private List<JSONLDContextBean> beans;
+
+    public List<JSONLDContextBean> convertToBeans(Set<String> ontologies) {
 
         OntModel model = ModelFactory.createOntologyModel();
 
-        List<NIFJSONLDContextBean> beans = new ArrayList<>();
+        beans = new ArrayList<>();
+        types = new HashMap<>();
+        properties = new HashSet<>();
 
         ontologies.forEach(ontology -> {
             model.read(ontology);
         });
 
+        model.listStatements().forEachRemaining(s -> {
+            if (PREDICATE_RANGE.equals(s.getPredicate().toString())) {
+                types.put(s.getSubject().toString(), s.getObject().toString());
+            }
+        });
+
         model.listDatatypeProperties().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
-            beans.add(bean);
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
+        });
+
+        model.listTransitiveProperties().forEachRemaining(data -> {
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
         });
 
         model.listObjectProperties().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
-            beans.add(bean);
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
         });
 
 
         model.listClasses().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
-            beans.add(bean);
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
         });
 
 
         model.listIndividuals().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
-            beans.add(bean);
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
         });
 
 
         model.listAnnotationProperties().forEachRemaining(data -> {
-            NIFJSONLDContextBean bean = new NIFJSONLDContextBean(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"));
-            beans.add(bean);
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
         });
+
 
 
         return beans;
     }
 
-    public class NIFJSONLDContextBean {
+    private void addToContext(String localName, String uri, String label, String comment, String type) {
+        if (isNotBlank(localName) && !properties.contains(localName)) {
+            JSONLDContextBean bean = new JSONLDContextBean(localName, uri, label, comment, type);
+            beans.add(bean);
+            properties.add(localName);
+        }
+    }
+
+
+
+    public class JSONLDContextBean {
         private String name;
 
         private String uri;
@@ -61,13 +93,15 @@ public class NIFJSONLDContext {
 
         private String comment;
 
-        public NIFJSONLDContextBean(String name, String uri, String label, String comment) {
+        private String type;
+
+        public JSONLDContextBean(String name, String uri, String label, String comment, String type) {
             setName(name);
             setUri(uri);
             setLabel(label);
             setComment(comment);
+            setType(type);
         }
-
 
         public String getName() {
             return name;
@@ -96,6 +130,14 @@ public class NIFJSONLDContext {
             } else {
                 this.label = "";
             }
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
 
         public String getComment() {

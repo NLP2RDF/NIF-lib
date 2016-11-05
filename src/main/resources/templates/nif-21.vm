@@ -5,7 +5,7 @@
           "hasContext":"$context",
           "http://purl.org/dc/terms/conformsTo" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core/2.1"
     },
-    "nif:annotationUnit" : [
+    "annotationUnit" : [
 	        #foreach( $bean in $beans){
     		"@id":  "$bean.context.NIF21id",
     		"@type": [ "String", "Word", "Phrase", "OffsetBasedString"],

@@ -5,7 +5,7 @@
 	        {
             "@id":  "$bean.context.NIF20id",
     		"@type": [ "$bean.types"],
-    		"nif:anchorOf" : "$bean.mention",
+    		"anchorOf" : "$bean.mention",
     		"beginIndex": "$bean.beginIndex",
     		"endIndex": "$bean.endIndex",
     		"referenceContext": "$bean.referenceContext",

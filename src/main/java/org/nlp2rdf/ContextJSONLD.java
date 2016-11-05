@@ -1,8 +1,10 @@
 package org.nlp2rdf;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ContextJSONLD {
 
-    String getContextForJSONLD(List<String> ontologies);
+    String getContextForJSONLD(Set<String> ontologies);
+
+    String getContextForJSONLD(Set<String> ontologies, String template);
 }

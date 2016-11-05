@@ -13,10 +13,13 @@ import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFJSONLDContext;
 import org.nlp2rdf.bean.NIFType;
 import org.nlp2rdf.exception.NIFException;
+import org.nlp2rdf.json.JSONMinify;
+
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.Set;
 
 import static org.nlp2rdf.validator.NIFMessagesException.NIF_BEANS_NOT_FOUND;
 
@@ -103,7 +106,8 @@ public class Conversor {
         return velocityEngine;
     }
 
-    protected String getContextForJSONLD(List<String> ontologies, String templatePath) {
+
+    protected String getContextForJSONLD(Set<String> ontologies, String templatePath) {
 
         VelocityEngine velocityEngine = getVelocityEngine();
 
@@ -115,9 +119,7 @@ public class Conversor {
 
         String result = getStringFromVelocity(template, context);
 
-        return result;
-
-
+         return JSONMinify.minify(result);
     }
 
     private String getStringFromVelocity(Template template, Context context) {

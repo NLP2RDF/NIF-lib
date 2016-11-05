@@ -1,6 +1,8 @@
 package org.nlp2rdf.nif20;
 
-public interface NIF20Format {
+import org.nlp2rdf.NIFFormat;
+
+public interface NIF20Format extends NIFFormat {
 
     String XML_PREFIX = "http://www.w3.org/2001/XMLSchema#";
 
@@ -36,7 +38,7 @@ public interface NIF20Format {
 
     String CONTEXT_FORMAT = "%s#char=%d,%d";
 
-    String TEMPLATE_NIF_PATH = "./src/main/resources/templates/nif-20.vm";
+    String TEMPLATE_NIF_PATH = TEMPLATE_ROOT.concat("nif-20.vm");
 
-    String TEMPLATE_CONTEXT_PATH = "./src/main/resources/templates/json-ld-context.vm";
+    String TEMPLATE_CONTEXT_PATH = TEMPLATE_ROOT.concat("json-ld-context.vm");
 }

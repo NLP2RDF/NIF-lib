@@ -13,6 +13,7 @@ import org.nlp2rdf.validator.NIFMessagesException;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
 public class NIF20 extends Conversor implements NIF20Format, NIFMessagesException, NIF, ContextJSONLD {
@@ -97,9 +98,14 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
     }
 
     @Override
-    public String getContextForJSONLD(List<String> ontologies) {
+    public String getContextForJSONLD(Set<String> ontologies) {
         return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH);
     }
 
+
+    @Override
+    public String getContextForJSONLD(Set<String> ontologies, String template) {
+        return super.getContextForJSONLD(ontologies, template);
+    }
 
 }
