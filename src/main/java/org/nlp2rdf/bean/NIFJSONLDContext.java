@@ -24,7 +24,7 @@ public class NIFJSONLDContext {
 
     private List<JSONLDContextBean> beans;
 
-    public List<JSONLDContextBean> convertToBeans(Set<String> ontologies) {
+    public List<JSONLDContextBean> convertToBeans(Set<String> ontologies, String language) {
 
         OntModel model = ModelFactory.createOntologyModel();
 
@@ -36,37 +36,31 @@ public class NIFJSONLDContext {
             model.read(ontology);
         });
 
-        model.listStatements().forEachRemaining(s -> {
+       model.listStatements().forEachRemaining(s -> {
             if (PREDICATE_RANGE.equals(s.getPredicate().toString())) {
                 types.put(s.getSubject().toString(), s.getObject().toString());
             }
         });
 
         model.listDatatypeProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
         });
 
         model.listTransitiveProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
         });
 
         model.listObjectProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
         });
 
 
         model.listClasses().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
         });
-
-
-        model.listIndividuals().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
-        });
-
 
         model.listAnnotationProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel("en"), data.getComment("en"), types.getOrDefault(data.getURI(), null));
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
         });
 
 

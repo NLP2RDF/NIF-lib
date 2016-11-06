@@ -107,7 +107,7 @@ public class Conversor {
     }
 
 
-    protected String getContextForJSONLD(Set<String> ontologies, String templatePath) {
+    protected String getContextForJSONLD(Set<String> ontologies, String templatePath, String language) {
 
         VelocityEngine velocityEngine = getVelocityEngine();
 
@@ -115,7 +115,7 @@ public class Conversor {
 
         Context context = new VelocityContext();
 
-        context.put("contextBeans", new NIFJSONLDContext().convertToBeans(ontologies));
+        context.put("contextBeans", new NIFJSONLDContext().convertToBeans(ontologies, language));
 
         String result = getStringFromVelocity(template, context);
 

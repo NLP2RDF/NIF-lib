@@ -216,9 +216,10 @@ public class NIF21Test {
         Set<String> ontologies = new HashSet<>();
 
         ontologies.add("http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#");
+        //ontologies.add("http://downloads.dbpedia.org/2016-04/dbpedia_2016-04.owl");
 
         //Act
-        System.out.println(context.getContextForJSONLD(ontologies));
+        System.out.println(context.getContextForJSONLD(ontologies, "en"));
 
     }
 

@@ -98,14 +98,14 @@ public class NIF20 extends Conversor implements NIF20Format, NIFMessagesExceptio
     }
 
     @Override
-    public String getContextForJSONLD(Set<String> ontologies) {
-        return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH);
+    public String getContextForJSONLD(Set<String> ontologies, String language) {
+        return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH, language);
     }
 
 
     @Override
-    public String getContextForJSONLD(Set<String> ontologies, String template) {
-        return super.getContextForJSONLD(ontologies, template);
+    public String getContextForJSONLD(Set<String> ontologies, String template, String language) {
+        return super.getContextForJSONLD(ontologies, template, language);
     }
 
 }
