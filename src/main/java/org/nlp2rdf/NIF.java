@@ -13,6 +13,8 @@ public interface NIF {
 
     String getTurtle();
 
+    String getTurtle(Model model);
+
     String getJSONLD(String context);
 
 }

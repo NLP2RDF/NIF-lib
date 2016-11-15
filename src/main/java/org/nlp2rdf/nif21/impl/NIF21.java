@@ -12,6 +12,7 @@ import org.nlp2rdf.parser.NIFParser;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static org.nlp2rdf.validator.NIFMessagesException.NIF_DATA_CONTEXT;
 import static org.nlp2rdf.validator.NIFMessagesException.NIF_DATA_VALUE_NOT_NULL;
@@ -89,13 +90,23 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
     }
 
     @Override
-    public String getContextForJSONLD(List<String> ontologies) {
-        return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH);
+    public String getContextForJSONLD(Set<String> ontologies, String language) {
+        return super.getContextForJSONLD(ontologies, TEMPLATE_CONTEXT_PATH, language);
+    }
+
+    @Override
+    public String getContextForJSONLD(Set<String> ontologies, String template, String language) {
+        return super.getContextForJSONLD(ontologies, template, language);
     }
 
     public void accept(NIFVisitor visitor) {
         for (NIFFormat elem : elements) {
             elem.accept(visitor);
         }
+    }
+
+    @Override
+    public String getTurtle(Model model) {
+        return super.getTurtle(getModel());
     }
 }

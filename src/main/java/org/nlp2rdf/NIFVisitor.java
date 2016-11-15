@@ -1,6 +1,6 @@
 package org.nlp2rdf;
 
-import com.hp.hpl.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Model;
 import org.nlp2rdf.nif21.impl.NIF21AnnotationUnit;
 
 

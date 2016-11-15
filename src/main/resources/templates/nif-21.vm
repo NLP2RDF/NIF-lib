@@ -1,23 +1,26 @@
 {
     "@context": "$contextJSON",
-     "referenceContext": {
-          "@type": ["ContextCollection"] ,
-          "hasContext":"$context",
-          "http://purl.org/dc/terms/conformsTo" : "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/org.unileipzig.persistence.nif-core/2.1"
-    },
-    "nif:annotationUnit" : [
-	        #foreach( $bean in $beans){
-    		"@id":  "$bean.context.NIF21id",
-    		"@type": [ "String", "Word", "Phrase", "OffsetBasedString"],
+    "@graph" : [
+#foreach( $bean in $beans)
+             {
+             #if($bean.nifType == "CONTEXT")
+             "@id" : "$bean.referenceContextId",
+             "@type" : [ "Context", "OffsetBasedString" ],
+             "beginIndex" : $bean.context.beginIndex,
+             "endIndex" : $bean.context.endIndex,
+             "isString" : "Diego Maradona is from Argentina."
+             #end
+            #if($bean.nifType == "ENTITY")
+            "@id":  "$bean.context.NIF21id",
+            "@type": "Annotation",
             "taAnnotatorsRef" : "$bean.annotator",
-            "taClassRef": ["$bean.types"],
-            "taConfidence": ["$bean.score"],
+            "taClassRef": [ #foreach ($type in $bean.types)"$type"#if( $foreach.hasNext ),#end#end],
+            "taConfidence": $bean.score,
             "taIdentRef": "$bean.taIdentRef",
-            "beginIndex": "$bean.beginIndex",
-            "endIndex": "$bean.endIndex"
-    	    }#if( $foreach.hasNext ),
-           #end
+            "referenceContext": "$bean.referenceContextId"#if($bean.taClassRef),
+            "taMsClassRef":[#foreach ($type in $bean.taClassRef)"$type"#if( $foreach.hasNext ),#end#end]#end
+            #end}#if( $foreach.hasNext )
+            ,#end
           #end
-
     ]
 }

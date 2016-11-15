@@ -1,6 +1,7 @@
 package org.nlp2rdf.formats;
 
 
+
 import com.hp.hpl.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -12,10 +13,13 @@ import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFJSONLDContext;
 import org.nlp2rdf.bean.NIFType;
 import org.nlp2rdf.exception.NIFException;
+import org.nlp2rdf.json.JSONMinify;
+
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
+import java.util.Set;
 
 import static org.nlp2rdf.validator.NIFMessagesException.NIF_BEANS_NOT_FOUND;
 
@@ -74,8 +78,6 @@ public class Conversor {
         Template template = velocityEngine.getTemplate(templatePath);
         Context context = new VelocityContext();
 
-        removeNIFContext(beans);
-
         if (beans.size() == 0) {
             throw new NIFException(NIF_BEANS_NOT_FOUND);
         }
@@ -86,7 +88,7 @@ public class Conversor {
 
         String result = getStringFromVelocity(template, context);
 
-        return result;
+        return JSONMinify.minify(result);
     }
 
     private void removeNIFContext(List<NIFBean> beans) {
@@ -102,7 +104,8 @@ public class Conversor {
         return velocityEngine;
     }
 
-    protected String getContextForJSONLD(List<String> ontologies, String templatePath) {
+
+    protected String getContextForJSONLD(Set<String> ontologies, String templatePath, String language) {
 
         VelocityEngine velocityEngine = getVelocityEngine();
 
@@ -110,13 +113,11 @@ public class Conversor {
 
         Context context = new VelocityContext();
 
-        context.put("contextBeans", new NIFJSONLDContext().convertToBeans(ontologies));
+        context.put("contextBeans", new NIFJSONLDContext().convertToBeans(ontologies, language));
 
         String result = getStringFromVelocity(template, context);
 
-        return result;
-
-
+         return JSONMinify.minify(result);
     }
 
     private String getStringFromVelocity(Template template, Context context) {

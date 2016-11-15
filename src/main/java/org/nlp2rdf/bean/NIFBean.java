@@ -1,5 +1,6 @@
 package org.nlp2rdf.bean;
 
+import com.google.common.hash.Hashing;
 import org.nlp2rdf.validator.NIFBeanContextValidator;
 import org.nlp2rdf.validator.NIFBeanNumbersValidator;
 import org.nlp2rdf.validator.NIFMessagesException;
@@ -29,6 +30,12 @@ public class NIFBean implements NIFMessagesException {
     private List<String> taClassRef;
 
     private String referenceContext;
+
+    private String referenceContextId;
+
+    public String getReferenceContextId() {
+        return referenceContextId;
+    }
 
     private Map<String, String> entityTypes = new HashMap<String, String>(8);
 
@@ -170,7 +177,10 @@ public class NIFBean implements NIFMessagesException {
     }
 
     public void setReferenceContext(String referenceContext) {
-        this.referenceContext = referenceContext;
+        if (referenceContext != null) {
+            this.referenceContext = referenceContext;
+            this.referenceContextId = Hashing.md5().hashBytes(referenceContext.getBytes()).toString();
+        }
     }
 
     public List<String> getTypes() {

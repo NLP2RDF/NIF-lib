@@ -4,6 +4,7 @@ package org.nlp2rdf.nif21.impl;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
+
 import com.hp.hpl.jena.vocabulary.RDF;
 import org.nlp2rdf.NIFAnnotationUnit;
 import org.nlp2rdf.NIFVisitor;
