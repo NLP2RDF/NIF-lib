@@ -78,8 +78,6 @@ public class Conversor {
         Template template = velocityEngine.getTemplate(templatePath);
         Context context = new VelocityContext();
 
-        removeNIFContext(beans);
-
         if (beans.size() == 0) {
             throw new NIFException(NIF_BEANS_NOT_FOUND);
         }
@@ -90,7 +88,7 @@ public class Conversor {
 
         String result = getStringFromVelocity(template, context);
 
-        return result;
+        return JSONMinify.minify(result);
     }
 
     private void removeNIFContext(List<NIFBean> beans) {

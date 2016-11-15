@@ -204,7 +204,7 @@ public class NIF21Test {
 
         //Act
         NIF nif21 = new NIF21(beans);
-        System.out.println(nif21.getJSONLD("http://www.freme-project.eu/context.jsonld"));
+        System.out.println(nif21.getJSONLD("http://www.jsonld-context.io/api/v1?ontology=http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core&ontology=http://www.w3.org/2005/11/its/rdf"));
 
     }
 
