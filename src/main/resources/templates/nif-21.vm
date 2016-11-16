@@ -8,7 +8,7 @@
              "@type" : [ "Context", "OffsetBasedString" ],
              "beginIndex" : $bean.context.beginIndex,
              "endIndex" : $bean.context.endIndex,
-             "isString" : "Diego Maradona is from Argentina."
+             "isString" : "$bean.mention"
              #end
             #if($bean.nifType == "ENTITY")
             "@id":  "$bean.context.NIF21id",
