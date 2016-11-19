@@ -1,9 +1,10 @@
 package org.nlp2rdf.nif20.impl;
 
 
-import org.apache.jena.datatypes.xsd.XSDDatatype;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
+
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
 import org.nlp2rdf.NIFLiteral;
 import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
@@ -25,8 +26,9 @@ public class NIF20Literal implements NIFLiteral, NIF20Format {
                 removeDuplicatedValues(model, contextRes, NIF_PROPERTY_BEGININDEX, entity.getMention());
                 removeDuplicatedValues(model, contextRes, NIF_PROPERTY_ENDINDEX, entity.getMention());
 
-                model.add(contextRes, model.createProperty(NIF_PROPERTY_ISSTRING),
-                        entity.getMention(), XSDDatatype.XSDstring);
+                contextRes.addLiteral(
+                        model.getProperty(NIF_PROPERTY_ISSTRING),
+                        entity.getMention());
 
                 model.add(contextRes, model.createProperty(NIF_PROPERTY_BEGININDEX),
                         entity.getContext().getBeginIndex().toString(),

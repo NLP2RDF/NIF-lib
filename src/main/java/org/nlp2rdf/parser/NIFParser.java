@@ -1,7 +1,7 @@
 package org.nlp2rdf.parser;
 
-import org.apache.jena.rdf.model.*;
-import org.apache.jena.vocabulary.RDF;
+import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.vocabulary.RDF;
 import org.nlp2rdf.nif20.NIF20Format;
 
 import java.io.ByteArrayInputStream;
