@@ -1,9 +1,13 @@
 package org.nlp2rdf.bean;
 
-
-
+import com.hp.hpl.jena.ontology.AnnotationProperty;
+import com.hp.hpl.jena.ontology.DatatypeProperty;
+import com.hp.hpl.jena.ontology.ObjectProperty;
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.TransitiveProperty;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Statement;
 
 import java.util.*;
 
@@ -31,36 +35,61 @@ public class NIFJSONLDContext {
         types = new HashMap<>();
         properties = new HashSet<>();
 
-        ontologies.forEach(ontology -> {
+        for(String ontology: ontologies) {
             model.read(ontology);
-        });
+        }
 
-       model.listStatements().forEachRemaining(s -> {
+        Iterator stms = model.listStatements();
+
+        while (stms.hasNext()) {
+            Statement s = (Statement) stms.next();
+
             if (PREDICATE_RANGE.equals(s.getPredicate().toString())) {
                 types.put(s.getSubject().toString(), s.getObject().toString());
             }
-        });
-
-        model.listDatatypeProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
-        });
-
-        model.listTransitiveProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
-        });
-
-        model.listObjectProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
-        });
+        }
 
 
-        model.listClasses().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
-        });
+        Iterator datatypeProperties = model.listDatatypeProperties();
 
-        model.listAnnotationProperties().forEachRemaining(data -> {
-            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types.getOrDefault(data.getURI(), null));
-        });
+        while (datatypeProperties.hasNext()) {
+            DatatypeProperty data = (DatatypeProperty) datatypeProperties.next();
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types != null ? data.getURI(): null);
+        }
+
+        Iterator transitiveProperties =  model.listTransitiveProperties();
+
+        while (transitiveProperties.hasNext()) {
+
+            TransitiveProperty data = (TransitiveProperty) transitiveProperties.next();
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types != null ? data.getURI(): null);
+
+        }
+
+        Iterator objectProperties = model.listObjectProperties();
+
+        while (objectProperties.hasNext()) {
+
+            ObjectProperty data = (ObjectProperty) objectProperties.next();
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types != null ? data.getURI(): null);
+
+        }
+
+        Iterator classes = model.listClasses();
+
+        while (classes.hasNext()) {
+            OntClass data = (OntClass) classes.next();
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types != null ? data.getURI(): null);
+        }
+
+
+        Iterator annotationProperties = model.listAnnotationProperties();
+
+        while (annotationProperties.hasNext()) {
+
+            AnnotationProperty data = (AnnotationProperty) annotationProperties.next();
+            addToContext(data.getLocalName(), data.getURI(), data.getLabel(language), data.getComment(language), types != null ? data.getURI(): null);
+        }
 
 
 

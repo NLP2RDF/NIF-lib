@@ -43,7 +43,9 @@ public class NIFBean implements NIFMessagesException {
 
         List<NIFBean> nifBeans = new ArrayList<>();
 
-        builders.forEach(builder -> nifBeans.add(new NIFBean(builder)));
+        for (NIFBeanBuilder builder: builders) {
+            nifBeans.add(new NIFBean(builder));
+        }
     }
 
     public List<String> getTaClassRef() {
@@ -75,10 +77,10 @@ public class NIFBean implements NIFMessagesException {
 
     public static void fillBeansWithContext(List<NIFBean> beans, String CONTEXT_FORMAT) {
 
-        Optional<NIFBean> context = beans.stream().filter(bean -> NIFType.CONTEXT.equals(bean.getNifType())).findFirst();
-
-        if (context.isPresent()) {
-            beans.forEach(bean -> bean.setReferenceContext(context.get().getContext().context(CONTEXT_FORMAT)));
+        for(NIFBean bean: beans) {
+            if ( bean != null && NIFType.CONTEXT.equals(bean.getNifType())) {
+                bean.setReferenceContext(bean.getContext().context(CONTEXT_FORMAT));
+            }
         }
     }
 
@@ -190,11 +192,12 @@ public class NIFBean implements NIFMessagesException {
     public void setTypes(List<String> types) {
         List<String> convertedTypes = new ArrayList<>();
         if (types != null) {
-            types.stream().forEach(type -> {
+
+            for(String type: types) {
                 if (type != null) {
-                    convertedTypes.add(entityTypes.getOrDefault(type, type));
+                    convertedTypes.add(entityTypes.get(type));
                 }
-            });
+            }
         }
         this.types = convertedTypes;
     }
@@ -320,7 +323,7 @@ public class NIFBean implements NIFMessagesException {
         }
 
         public NIFBeanBuilder types(List<String> types) {
-            this.types = types == null ? new ArrayList<>(1) : types;
+            this.types = types == null ? new ArrayList<String>(1) : types;
             return this;
         }
 

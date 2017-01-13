@@ -49,7 +49,6 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
         NIFBean bean = beans.get(0);
         NIF21CreateContext nif21Context = new NIF21CreateContext(bean.getContext(), bean);
 
-
         nif21Context.setModel(model.create());
         NIFVisitor nifVisitor = nif21Context;
 

@@ -92,8 +92,20 @@ public class Conversor {
     }
 
     private void removeNIFContext(List<NIFBean> beans) {
-        NIFBean nifContext = beans.stream().filter(bean -> NIFType.CONTEXT.equals(bean.getNifType())).findFirst().get();
-        beans.remove(nifContext);
+        NIFBean nifContext = null;
+
+
+        for(NIFBean bean: beans) {
+            if (NIFType.CONTEXT.equals(bean.getNifType())) {
+                nifContext = bean;
+                break;
+            }
+        }
+
+        if (nifContext != null) {
+            beans.remove(nifContext);
+        }
+
     }
 
     private VelocityEngine getVelocityEngine() {

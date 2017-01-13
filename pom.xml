@@ -6,7 +6,7 @@
     <groupId>org.nlp2rdf</groupId>
     <artifactId>nif</artifactId>
     <packaging>jar</packaging>
-    <version>0.3.3</version>
+    <version>0.3.7-spotlight</version>
     <name>NIF library</name>
 
     <description>
@@ -127,8 +127,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -153,8 +153,8 @@
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.3</version>
                         <configuration>
-                            <source>1.8</source>
-                            <target>1.8</target>
+                            <source>1.7</source>
+                            <target>1.7</target>
                         </configuration>
                     </plugin>
                     <plugin>
