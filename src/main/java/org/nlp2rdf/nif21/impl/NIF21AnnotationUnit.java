@@ -1,11 +1,10 @@
 package org.nlp2rdf.nif21.impl;
 
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
-
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.vocabulary.RDF;
 import org.nlp2rdf.NIFAnnotationUnit;
 import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
@@ -23,7 +22,7 @@ public class NIF21AnnotationUnit implements NIFAnnotationUnit, NIF21Format {
         if (model != null && entity != null && entity.isMention()) {
             Resource contextRes = model.getResource(entity.getContext().getNIF21());
 
-            /*Resource unitRes = model.createResource().addProperty(RDF.type,
+           /* Resource unitRes = model.createResource().addProperty(RDF.type,
                     ResourceFactory.createResource(NIF_PROPERTY_ENTITY_OCCURRENCE));*/
 
             contextRes.addProperty(model.createProperty(RDF_PROPERTY_IDENTREF),
@@ -55,7 +54,7 @@ public class NIF21AnnotationUnit implements NIFAnnotationUnit, NIF21Format {
             contextRes.addProperty(model.createProperty(RDF_PROPERTY_ANNOTATOR),
                     model.createProperty(entity.getAnnotator()));
 
-            //contextRes.addProperty(model.createProperty(NIF_PROPERTY_ANNOTATION_UNIT), unitRes);
+//            contextRes.addProperty(model.createProperty(NIF_PROPERTY_ANNOTATION_UNIT), unitRes);
 
 
         }

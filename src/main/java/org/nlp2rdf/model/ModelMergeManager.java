@@ -1,7 +1,7 @@
 package org.nlp2rdf.model;
 
 
-import com.hp.hpl.jena.rdf.model.*;
+import org.apache.jena.rdf.model.*;
 
 public class ModelMergeManager {
 
