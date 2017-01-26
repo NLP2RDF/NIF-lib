@@ -1,7 +1,7 @@
 package org.nlp2rdf.nif20.impl;
 
 
-import org.apache.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Model;
 import org.nlp2rdf.*;
 import org.nlp2rdf.bean.NIFBean;
 import org.nlp2rdf.bean.NIFContext;

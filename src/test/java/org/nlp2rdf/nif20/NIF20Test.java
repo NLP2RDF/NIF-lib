@@ -1,31 +1,8 @@
 package org.nlp2rdf.nif20;
 
 
-import org.aksw.rdfunit.enums.TestCaseExecutionType;
-import org.aksw.rdfunit.exceptions.TestCaseInstantiationException;
-import org.aksw.rdfunit.io.reader.RdfReaderException;
-import org.aksw.rdfunit.io.reader.RdfReaderFactory;
-import org.aksw.rdfunit.model.interfaces.results.TestCaseResult;
-import org.aksw.rdfunit.model.interfaces.results.TestExecution;
-import org.aksw.rdfunit.validate.wrappers.RDFUnitStaticValidator;
-import org.aksw.rdfunit.validate.wrappers.RDFUnitTestSuiteGenerator;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.riot.Lang;
-import org.junit.Test;
-import org.nlp2rdf.NIF;
-import org.nlp2rdf.bean.NIFBean;
-import org.nlp2rdf.bean.NIFType;
-import org.nlp2rdf.nif20.impl.NIF20;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-
 public class NIF20Test {
-
+/*
     private List<NIFBean> getBean() {
 
         //----------------------------
@@ -201,5 +178,5 @@ public class NIF20Test {
         System.out.println(nif20.getJSONLD("http://www.freme-project.eu/context.jsonld"));
 
     }
-
+*/
 }

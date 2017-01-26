@@ -1,8 +1,8 @@
 package org.nlp2rdf.nif20.impl;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.RDF;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 import org.nlp2rdf.NIFProperties;
 import org.nlp2rdf.NIFVisitor;
 import org.nlp2rdf.bean.NIFBean;
