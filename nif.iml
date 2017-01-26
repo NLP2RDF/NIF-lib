@@ -13,6 +13,13 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-arq:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsonld-java:jsonld-java:0.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.6" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.6" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.jena:jena-core:2.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.jena:jena-iri:1.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.jena:jena-arq:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.2.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.2.5" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.6" level="project" />
