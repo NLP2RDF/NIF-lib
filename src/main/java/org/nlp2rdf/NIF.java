@@ -2,6 +2,9 @@ package org.nlp2rdf;
 
 
 import org.apache.jena.rdf.model.Model;
+import org.nlp2rdf.bean.NIFBean;
+
+import java.util.List;
 
 public interface NIF {
 
@@ -11,9 +14,9 @@ public interface NIF {
 
     String getRDFxml();
 
-    String getTurtle();
+    String getTurtle(List<NIFBean> beans);
 
-    String getTurtle(Model model);
+    String getTurtle(List<NIFBean> beans, Model model);
 
     String getJSONLD(String context);
 
