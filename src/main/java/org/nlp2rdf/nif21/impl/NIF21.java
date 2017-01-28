@@ -76,11 +76,11 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
         return super.getRDFxml(getModel());
     }
 
-    public String getTurtle(List<NIFBean> beans) {
-        return super.getTurtle(beans, getModel());
+    public String getTurtle() {
+        return super.getTurtle(getModel());
     }
 
-    public String getJSONLD(String context) {
+    public String getJSONLD( String context) {
 
         Objects.requireNonNull(context, String.format(NIF_DATA_VALUE_NOT_NULL, NIF_DATA_CONTEXT));
 
@@ -106,7 +106,7 @@ public class NIF21 extends Conversor implements NIF21Format, NIF, ContextJSONLD 
     }
 
     @Override
-    public String getTurtle(List<NIFBean> beans, Model model) {
-        return super.getTurtle(beans, getModel());
+    public String getTurtle(Model model) {
+        return super.getTurtle(getModel());
     }
 }

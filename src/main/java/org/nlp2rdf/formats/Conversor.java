@@ -54,41 +54,9 @@ public class Conversor {
      *
      * @return
      */
-    protected String getTurtle(List<NIFBean> beans, Model model) {
+    protected String getTurtle(Model model) {
 
-
-
-        String n3 = getModelAsStringByFormat(model, Lang.NTRIPLES);
-
-        if (n3 != null && !n3.isEmpty()) {
-            StringBuilder builder = new StringBuilder();
-            List<String> n3Array = Arrays.asList(n3.split(NEW_LINE));
-            n3Array.stream().forEach(triple-> {
-                if (triple.contains(NIF21Format.RDF_PROPERTY_IDENTREF)) {
-
-                    String[] tuples = triple.split(N3_TOKEN_SPLIT);
-
-                    beans.stream().forEach(bean-> {
-                        if (bean.getTaIdentRef() != null) {
-                            String taIdent = String.format(N3_FORMAT, tuples[0].substring(1),
-                                    NIF21Format.RDF_PROPERTY_IDENTREF, bean.getTaIdentRef());
-                            builder.append(taIdent);
-                            builder.append(NEW_LINE);
-                        }
-                    });
-
-
-                } else {
-                    builder.append(triple);
-                    builder.append(NEW_LINE);
-                }
-            });
-
-            return builder.toString();
-        }
-
-        return n3;
-
+        return getModelAsStringByFormat(model, Lang.TURTLE);
 
     }
 
