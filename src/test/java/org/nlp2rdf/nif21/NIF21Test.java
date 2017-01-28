@@ -116,7 +116,7 @@ public class NIF21Test {
 
         //Act
         NIF nif20 = new NIF21(beans);
-        System.out.println(nif20.getTurtle(beans));
+        System.out.println(nif20.getTurtle());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class NIF21Test {
 
         //Act
         NIF nif20 = new NIF21(beans);
-        String turtle = nif20.getTurtle(beans);
+        String turtle = nif20.getTurtle();
 
         //Assert
         RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
@@ -134,14 +134,13 @@ public class NIF21Test {
 
 
     @Test
-    @Ignore
     public void testIfNTisIsomorphicWithTurtle() throws RdfReaderException, TestCaseInstantiationException {
         //Init
         List<NIFBean> beans = getBean();
 
         //Act
         NIF nif20 = new NIF21(beans);
-        String turtle = nif20.getTurtle(beans);
+        String turtle = nif20.getTurtle();
 
         Model modelTtl = RdfReaderFactory.createReaderFromText(turtle, Lang.TURTLE.getName()).read();
 

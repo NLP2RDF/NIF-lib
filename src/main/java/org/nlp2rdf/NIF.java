@@ -14,9 +14,9 @@ public interface NIF {
 
     String getRDFxml();
 
-    String getTurtle(List<NIFBean> beans);
+    String getTurtle();
 
-    String getTurtle(List<NIFBean> beans, Model model);
+    String getTurtle(Model model);
 
     String getJSONLD(String context);
 
