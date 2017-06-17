@@ -69,7 +69,6 @@ public class NIFBean implements NIFMessagesException {
 
         NIFBeanNumbersValidator.checkIfEndIndexIsGreaterThanBeginIndex(beans);
         NIFBeanContextValidator.checkIfContextExists(beans);
-        NIFBeanContextValidator.checkIfHasDuplicatedContext(beans);
 
     }
 

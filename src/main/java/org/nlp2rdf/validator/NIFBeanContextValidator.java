@@ -14,10 +14,4 @@ public class NIFBeanContextValidator implements NIFMessagesException {
             throw new NIFException(NIF_STRUCTURE_CONTEXT_NOT_FOUND);
         }
     }
-
-    public static void checkIfHasDuplicatedContext(List<NIFBean> beans) {
-        if (beans.stream().filter(bean -> NIFType.CONTEXT.equals(bean.getNifType())).count() > 1) {
-            throw new NIFException(NIF_STRUCTURE_DUPLICATED_CONTEXT);
-        }
-    }
 }
