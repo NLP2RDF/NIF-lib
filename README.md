@@ -1,5 +1,5 @@
 ## NIF library
-[![maven-central](https://img.shields.io/badge/maven--central-0.3.3-blue.svg)](http://search.maven.org/#artifactdetails%7Corg.nlp2rdf%7Cnif%7C0.3.3%7Cjar)
+[![maven-central](https://img.shields.io/badge/maven--central-0.4-blue.svg)](http://search.maven.org/#artifactdetails%7Corg.nlp2rdf%7Cnif%7C0.4%7Cjar)
 [![Build Status](https://travis-ci.org/NLP2RDF/NIF-lib.svg?branch=master)](https://travis-ci.org/NLP2RDF/NIF-lib) [![Coverage Status](https://coveralls.io/repos/github/NLP2RDF/NIF-lib/badge.svg)](https://coveralls.io/github/NLP2RDF/NIF-lib)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0434cdca38e74a2f8ba271496d3de2eb)](https://www.codacy.com/app/sandroacoelho/NIF-lib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NLP2RDF/NIF-lib&amp;utm_campaign=Badge_Grade)
 [![codebeat badge](https://codebeat.co/badges/d2f8dbc4-6853-4bc4-9933-6e6830a76a7b)](https://codebeat.co/projects/github-com-nlp2rdf-nif-lib) [![Project Stats](https://www.openhub.net/p/NIF-lib/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/NIF-lib)
@@ -13,7 +13,7 @@ The NLP Interchange Format (NIF) is an RDF/OWL-based format that aims to achieve
 [NIF Documentation](http://persistence.uni-leipzig.org/nlp2rdf/)
 
 
-## Supported versions
+## Supported NIF versions
 
  * 2.0 
  * 2.1
@@ -24,6 +24,11 @@ The NLP Interchange Format (NIF) is an RDF/OWL-based format that aims to achieve
 * Turtle
 * RDF-xml
 * NTriples
+
+## Versions
+
+* Jena 2.13.0  - 0.2.x ; 0.3.x
+* Jena 3.1.0   - 0.4.x 
 
 ## Usage
 
