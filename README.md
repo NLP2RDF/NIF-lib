@@ -59,7 +59,7 @@ NIFBean beanContext = new NIFBean(contextBuilder);
                 .annotator("http://freme-project.eu/tools/freme-ner")
                 .types(types);
 
-        NIFBean entityBean = new NIFBean(entity);
+        NIFBean entityBean = new NIFBean(contextBuilder);
 
 ```
 
@@ -69,7 +69,7 @@ NIFBean beanContext = new NIFBean(contextBuilder);
     List<NIFBean> beans = new ArrayList<>();
     
     beans.add(entityBean);
-    beans.add(contextBuilder);
+    
 ```
 
 4) Instantiate a NIF version that you like to use,
