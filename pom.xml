@@ -6,7 +6,7 @@
     <groupId>org.nlp2rdf</groupId>
     <artifactId>nif</artifactId>
     <packaging>jar</packaging>
-    <version>0.4</version>
+    <version>0.4.1</version>
     <name>NIF library</name>
 
     <description>
