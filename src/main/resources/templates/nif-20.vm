@@ -8,7 +8,7 @@
     "@type" : [ "Context", "OffsetBasedString" ],
     "beginIndex" : $bean.context.beginIndex,
     "endIndex" : $bean.context.endIndex,
-    "isString" : "$bean.mention"
+    "isString" : "$bean.mention.trim()"
 	#end
 	#if($bean.nifType == "ENTITY")
     "@id":  "$bean.context.NIF21id",
